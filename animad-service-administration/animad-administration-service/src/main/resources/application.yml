@@ -1,0 +1,50 @@
+# Service Info
+spring:
+  profiles:
+    active: local
+
+  #i18n
+  messages:
+      basename: message
+      cache-seconds: -1
+      encoding: UTF-8
+
+  # Spring data rest
+  data.rest:
+      return-body-on-update : true
+      return-body-on-create : true
+
+ribbon.http.client.enabled: true
+
+info.url: http://localhost:${service.port}/
+service:
+    info:
+        oid: ANIMAD-ADMINISTRATION
+        name: Administration
+        version: v0.1
+
+# Let flyway recreate the DB if validation fails.
+flyway.clean-on-validation-error : true
+
+logging.level.org.springframework.cloud.netflix.config : 'OFF'
+logging.level.com.netflix.discovery : 'OFF'
+
+#Wiremock
+URL : http://localhost:8089/
+
+# Security
+# security.oauth2.resource.userInfoUri: http://AUTHSERVICE/uaa/user
+# security.oauth2.resource.preferTokenInfo: false
+security.ignored: /**
+
+server.port: 39146
+---
+spring:
+    profiles: docker
+---
+spring:
+    profiles: local
+---
+spring:
+    profiles: vm
+
