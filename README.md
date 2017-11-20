@@ -7,8 +7,8 @@ The animad backend - generated from the 'animad.barrakuda' model by the Barrakud
 * Do a 'mvn install -DskipTests'.
 
 # Changes to the auto-generated code
-* service security disabled (until it's implemented) by commenting out '@PreAuthorize' (19 matches).
-* comment out (until infrastructure is ready) the @EnableEurekaClient annotation in the MicroServiceApplication class.
+* service security disabled (until it's implemented) by commenting out `@PreAuthorize` (19 matches).
+* comment out (until infrastructure is ready) the `@EnableEurekaClient` annotation in the `MicroServiceApplication` class.
 * change security settings in application.yml:
     ```application.yml
     # Security
@@ -16,4 +16,4 @@ The animad backend - generated from the 'animad.barrakuda' model by the Barrakud
     # security.oauth2.resource.preferTokenInfo: false
     security.ignored: /**
     ```
-*
+* Add a fix server port to the service in application.yml: `server.port: 39146`
