@@ -8,4 +8,12 @@ The animad backend - generated from the 'animad.barrakuda' model by the Barrakud
 
 # Changes to the auto-generated code
 * service security disabled (until it's implemented) by commenting out '@PreAuthorize' (19 matches).
-* cooment out (until infrastructure is ready) the @EnableEurekaClient annotation in the MicroServiceApplication class.
+* comment out (until infrastructure is ready) the @EnableEurekaClient annotation in the MicroServiceApplication class.
+* change security settings in application.yml:
+    ```application.yml
+    # Security
+    # security.oauth2.resource.userInfoUri: http://AUTHSERVICE/uaa/user
+    # security.oauth2.resource.preferTokenInfo: false
+    security.ignored: /**
+    ```
+*
