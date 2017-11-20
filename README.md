@@ -1,9 +1,6 @@
 # lhm_animad_admin_service
 The animad backend - generated from the 'animad.barrakuda' model by the Barrakuda Web Generator available under http://krause:10001/.
 
-# Prerequisites for the build
-
-
 # Changes to the auto-generated code
 * Search in all pom files for '1.0-SNAPSHOT' and replace with '1.0' (should be 10 matches)
 * commented out the oracle driver dependency in the animad_administration_service pom file
