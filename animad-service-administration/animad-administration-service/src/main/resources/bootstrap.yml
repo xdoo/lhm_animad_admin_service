@@ -130,7 +130,7 @@ spring:
   # in memory db for local use
   # 
   datasource:
-    url: jdbc:h2:mem:data_ref
+    url: jdbc:h2:mem:animad
     username: sa
     password:
   #JPA
