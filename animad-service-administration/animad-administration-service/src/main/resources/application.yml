@@ -2,7 +2,7 @@
 spring:
   profiles:
     active: local
-
+          
   #i18n
   messages:
       basename: message
@@ -13,7 +13,7 @@ spring:
   data.rest:
       return-body-on-update : true
       return-body-on-create : true
-
+      
 ribbon.http.client.enabled: true
 
 info.url: http://localhost:${service.port}/
@@ -37,13 +37,14 @@ URL : http://localhost:8089/
 # security.oauth2.resource.preferTokenInfo: false
 security.ignored: /**
 
-server.port: 39146
 ---
 spring:
     profiles: docker
 ---
 spring:
     profiles: local
+    h2.console.enabled: true
+server.port: 39146
 ---
 spring:
     profiles: vm

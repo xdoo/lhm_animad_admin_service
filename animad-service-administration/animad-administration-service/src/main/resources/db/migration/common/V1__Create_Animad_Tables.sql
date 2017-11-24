@@ -62,6 +62,4 @@
 	add constraint FK_animal_keeper_TO_animal 
 	foreign key (animal_oid) 
 	references Animal;
-	
-	
-	
+
