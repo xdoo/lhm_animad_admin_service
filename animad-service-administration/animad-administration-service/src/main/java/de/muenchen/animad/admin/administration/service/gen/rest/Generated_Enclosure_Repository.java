@@ -91,14 +91,14 @@ public interface Generated_Enclosure_Repository extends CrudRepository<Enclosure
 	//@PreAuthorize("hasAuthority('administration_DELETE_Enclosure')")
 	void deleteAll();
 	
-	Enclosure_ findByEnclosureID(@Param(value= "enclosureID") String enclosureID);
+	Enclosure_ findByName(@Param(value= "name") String name);
 	Enclosure_ findByCleaningTime(@Param(value= "cleaningTime") java.time.LocalTime cleaningTime);
-	List<Enclosure_> findEnclosureByEnclosureID(@Param("enclosureID") String enclosureID);
+	List<Enclosure_> findEnclosureByName(@Param("name") String name);
 	List<Enclosure_> findEnclosureByCleaningTime(@Param("cleaningTime") String cleaningTime);
 	
 	/**
-	 * Find the Enclosure_ with a animals relation to the Animal with the given oid.
-	 * @param oid the unique oid of the Animal that will be searched for in the animals relation.
+	 * Find the Enclosure_ with a animalList relation to the Animal with the given oid.
+	 * @param oid the unique oid of the Animal that will be searched for in the animalList relation.
 	 */
-	Enclosure_ findByAnimalsOid(@Param(value = "oid") UUID oid);
+	Enclosure_ findByAnimalListOid(@Param(value = "oid") UUID oid);
 }

@@ -1,0 +1,119 @@
+
+domain animad package de.muenchen version 0.1;
+
+serviceModel administration package de.muenchen.animad.admin version 0.1 {
+
+    // Lists (enumerations)
+    // Contains static data that does not change
+    customListType animals ["Elephant" "Giraffe" "Penguin" "Barrakuda"];
+    customListType gender ["male" "female"];
+    customListType features ["cleaning" "feeding" "breeding" "paperwork" "taxes"];
+    
+    customLogicType bool;
+
+    // Text Patterns
+    // here we need a simple text type with a mininmal length of 2 and a maximum of 30
+    customTextType textMin2Max30 minLength=2 maxLength=30;
+
+    // Numbers
+    // A simple floating point number
+    customNumberType double pointNumber;
+    
+    customNumberType int minValue=0;
+    
+    // Dates
+    // We need one date datatype for dates that lie in the past
+    // and one for dates in combination with a time
+    customTimeType pastDate inThePast date;
+    customTimeType event dateAndTime;
+    customTimeType daytime time;
+
+    entity enclosure {
+        name textMin2Max30 mainFeature searchable "A123";
+        cleaningTime daytime mainFeature "15:15:15";
+        animalList oneToMany animal;
+    }
+
+    entity animal {
+        name textMin2Max30 mainFeature searchable "Paul";
+        species animals mainFeature searchable "Elephant";
+        birthday pastDate mainFeature "01.01.1990";
+        gender gender "male";
+        weight double "600.0";
+        keeperList manyToMany keeper;
+        alive bool "true";
+    }
+
+    entity keeper {
+        firstName textMin2Max30 mainFeature searchable "Hans";
+        lastName textMin2Max30 mainFeature searchable "Dampf";
+        employmentDate pastDate mainFeature searchable "01.01.2012";
+        skill manyToMany features "cleaning";
+        birthday pastDate "01.01.1990";
+        salary int "1500";
+    }
+
+    businessAction createAppointment {
+        purpose "Create an appointment at the veterinarian for an animal";
+        given species animals;
+        given animalName textMin2Max30;
+        given reasonForAppointment textMin2Max30;
+        then event;
+    }
+}
+
+guiModel keeperinterface package de.muenchen.animad.admin version 0.1 {
+    mainview animals;
+    
+    view animals appearsInMenu {
+        component animals for administration.animal type Table {
+            button detail navigatesTo animalDetailView;
+        }
+        component createAnimal for administration.animal type CreateForm {
+            button save navigatesTo animals;
+        }
+        button CreateAppointment navigatesTo appointmentView;
+    }
+    
+    view keepers appearsInMenu {
+        component keepers for administration.keeper type Table {}
+        component createKeeper for administration.keeper type CreateForm {
+            button save navigatesTo keepers;
+        }
+    }
+
+    view enclosures appearsInMenu {
+        component enclosures for administration.enclosure type Table {
+            button detail navigatesTo enclosureDetailView;
+        }
+        component createEnclosure for administration.enclosure type CreateForm {
+            button save navigatesTo enclosures;
+        }
+    }
+
+    view animalDetailView {
+        component readAnimal for administration.animal type ReadWriteForm {
+        }
+        relComponent animalsKeeper for administration.animal.keeperList type ReadEditComponent {
+            button delete navigatesTo animalDetailView;
+        }
+        relComponent animalsKeeperAdder for administration.animal.keeperList type AddTable {
+        }
+    }
+
+    view enclosureDetailView {
+        component readEnclosure for administration.enclosure type ReadWriteForm {
+        }
+        relComponent enclosureAnimals for administration.enclosure.animalList type ReadEditComponent {
+            button delete navigatesTo animalDetailView;
+        }
+        relComponent enclosureAnimalsAdder for administration.enclosure.animalList type AddTable {
+        }
+    }
+
+    view appointmentView {
+        component selectAnimal for administration.animal type Table;
+        button Send;
+    }
+}
+

@@ -2,7 +2,7 @@
 spring:
   profiles:
     active: local
-          
+
   #i18n
   messages:
       basename: message
@@ -13,7 +13,7 @@ spring:
   data.rest:
       return-body-on-update : true
       return-body-on-create : true
-      
+
 ribbon.http.client.enabled: true
 
 info.url: http://localhost:${service.port}/

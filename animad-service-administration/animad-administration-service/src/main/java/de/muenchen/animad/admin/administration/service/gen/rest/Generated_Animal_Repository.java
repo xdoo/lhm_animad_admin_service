@@ -105,8 +105,8 @@ public interface Generated_Animal_Repository extends CrudRepository<Animal_, UUI
 	List<Animal_> findAnimalByBirthday(@Param("birthday") String birthday);
 	
 	/**
-	 * Find the Animal_ entities with a keeper relation to the Zookeeper with the given oid.
-	 * @param oid the unique oid of the Zookeeper that will be searched for in the keeper relation.
+	 * Find the Animal_ entities with a keeperList relation to the Keeper with the given oid.
+	 * @param oid the unique oid of the Keeper that will be searched for in the keeperList relation.
 	 */
-	java.util.List<Animal_> findByKeeperOid(@Param(value = "oid") UUID oid);
+	java.util.List<Animal_> findByKeeperListOid(@Param(value = "oid") UUID oid);
 }

@@ -1,4 +1,4 @@
-	-- This file is for ORACLE
+	-- This file is for H2
 
 	--**************************
 	--Tables
@@ -7,26 +7,26 @@
 	create table Enclosure (
 	oid varchar(36),
 	name varchar(30) not null, 
-	cleaningtime TIMESTAMP not null, 
+	cleaningtime datetime not null, 
 	primary key (oid));
 	
 	create table Animal (
 	oid varchar(36),
 	name varchar(30) not null, 
 	species varchar(255) not null, 
-	birthday TIMESTAMP not null, 
+	birthday datetime not null, 
 	gender varchar(255) not null, 
-	weight NUMBER(19, 9) not null, 
-	alive NUMBER(1) not null, 
+	weight decimal not null, 
+	alive boolean not null, 
 	primary key (oid));
 	
 	create table Keeper (
 	oid varchar(36),
 	firstname varchar(30) not null, 
 	lastname varchar(30) not null, 
-	employmentdate TIMESTAMP not null, 
-	birthday TIMESTAMP not null, 
-	salary NUMBER(19, 0) not null, 
+	employmentdate datetime not null, 
+	birthday datetime not null, 
+	salary bigint not null, 
 	primary key (oid));
 	
 	--Enclosure_AnimalList Relation Table

@@ -41,12 +41,12 @@ public class Enclosure_ extends BaseEntity {
 	// Variables //
 	// ========= //
 	
-	@Column(name="enclosureID")
+	@Column(name="name")
 	@Field
 	@FieldBridge(impl = PetersPerfectBridge.class)
 	@NotNull
 	@Size(min=2, max=30)
-	private String enclosureID;
+	private String name;
 	
 	
 	@Column(name="cleaningTime")
@@ -57,11 +57,11 @@ public class Enclosure_ extends BaseEntity {
 	
 	
 	@OrderColumn(name="order_index")
-	@JoinTable(name = "Enclosure_Animals", joinColumns = { @JoinColumn(name = "enclosure_oid")}, inverseJoinColumns = {@JoinColumn(name="animals_oid")})
+	@JoinTable(name = "Enclosure_AnimalList", joinColumns = { @JoinColumn(name = "enclosure_oid")}, inverseJoinColumns = {@JoinColumn(name="animalList_oid")})
 	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@NotNull
 	@Size(min = 1)
-	private java.util.List<Animal_> animals = new java.util.ArrayList<>();
+	private java.util.List<Animal_> animalList = new java.util.ArrayList<>();
 	
 	
 	/**
@@ -72,12 +72,12 @@ public class Enclosure_ extends BaseEntity {
 	// =================== //
 	// Getters and Setters //
 	// =================== //
-	public String getEnclosureID(){
-		return enclosureID;
+	public String getName(){
+		return name;
 	}
 	
-	public void setEnclosureID(String enclosureID){
-		this.enclosureID = enclosureID;
+	public void setName(String name){
+		this.name = name;
 	}
 	
 	
@@ -90,12 +90,12 @@ public class Enclosure_ extends BaseEntity {
 	}
 	
 	
-	public java.util.List<Animal_> getAnimals(){
-		return animals;
+	public java.util.List<Animal_> getAnimalList(){
+		return animalList;
 	}
 	
-	public void setAnimals(java.util.List<Animal_> animals){
-		this.animals = animals;
+	public void setAnimalList(java.util.List<Animal_> animalList){
+		this.animalList = animalList;
 	}
 	
 	
@@ -110,11 +110,11 @@ public class Enclosure_ extends BaseEntity {
 		if (!super.equals(other))
 			return false;
 		Enclosure_ enclosure = (Enclosure_) other;
-		if (getEnclosureID() != null ? !getEnclosureID().equals(enclosure.getEnclosureID()) : enclosure.getEnclosureID() != null)
+		if (getName() != null ? !getName().equals(enclosure.getName()) : enclosure.getName() != null)
 			return false;
 		if (getCleaningTime() != enclosure.getCleaningTime())
 			return false;
-		if (getAnimals() != null ? !getAnimals().equals(enclosure.getAnimals()) : enclosure.getAnimals() != null)
+		if (getAnimalList() != null ? !getAnimalList().equals(enclosure.getAnimalList()) : enclosure.getAnimalList() != null)
 			return false;
 		return true;
 	}
@@ -122,9 +122,9 @@ public class Enclosure_ extends BaseEntity {
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
-		result = 31 * result + (getEnclosureID() != null ? getEnclosureID().hashCode() : 0);
+		result = 31 * result + (getName() != null ? getName().hashCode() : 0);
 		result = 31 * result + (getCleaningTime() != null ? getCleaningTime().hashCode() : 0);
-		result = 31 * result + (getAnimals() != null ? getAnimals().hashCode() : 0);
+		result = 31 * result + (getAnimalList() != null ? getAnimalList().hashCode() : 0);
 		return result;
 	}
 
@@ -139,9 +139,9 @@ public class Enclosure_ extends BaseEntity {
 	@Override
 	public String toString(){
 		String s = "enclosure";
-		s += "\nString enclosureID: " + getEnclosureID();
+		s += "\nString name: " + getName();
 		s += "\njava.time.LocalTime cleaningTime: " + getCleaningTime();
-		s += "\njava.util.List<Animal_> animals: " + getAnimals();
+		s += "\njava.util.List<Animal_> animalList: " + getAnimalList();
 		return s;
 	}
 }

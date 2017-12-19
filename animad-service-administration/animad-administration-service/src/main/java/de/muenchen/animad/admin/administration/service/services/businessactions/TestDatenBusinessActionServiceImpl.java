@@ -16,8 +16,8 @@ import de.muenchen.animad.admin.administration.service.gen.domain.Enclosure_;
 import de.muenchen.animad.admin.administration.service.rest.Enclosure_Repository;
 import de.muenchen.animad.admin.administration.service.gen.domain.Animal_;
 import de.muenchen.animad.admin.administration.service.rest.Animal_Repository;
-import de.muenchen.animad.admin.administration.service.gen.domain.Zookeeper_;
-import de.muenchen.animad.admin.administration.service.rest.Zookeeper_Repository;
+import de.muenchen.animad.admin.administration.service.gen.domain.Keeper_;
+import de.muenchen.animad.admin.administration.service.rest.Keeper_Repository;
 
 import de.muenchen.service.security.UserInfo;
 
@@ -37,13 +37,13 @@ public class TestDatenBusinessActionServiceImpl implements TestDatenBusinessActi
 	@Autowired
 	Animal_Repository animalRepo;
 	@Autowired
-	Zookeeper_Repository zookeeperRepo;
+	Keeper_Repository keeperRepo;
 
 	public void testdatenErzeugen(){
 		
 		//insert example data for Enclosure_
 		Enclosure_ enclosure = new Enclosure_();
-		enclosure.setEnclosureID("A123");
+		enclosure.setName("A123");
 		enclosure.setCleaningTime(java.time.LocalTime.parse("15:15:15",java.time.format.DateTimeFormatter.ofPattern("k:mm:ss")));
 		enclosure.setOid(UUID.randomUUID());
 		
@@ -57,21 +57,22 @@ public class TestDatenBusinessActionServiceImpl implements TestDatenBusinessActi
 		animal.setAlive(true);
 		animal.setOid(UUID.randomUUID());
 		
-		//insert example data for Zookeeper_
-		Zookeeper_ zookeeper = new Zookeeper_();
-		zookeeper.setName("Hans Peter");
-		zookeeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2012",java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-		zookeeper.setCanDo(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
-		zookeeper.setBirthday(java.time.LocalDate.parse("01.01.1990",java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-		zookeeper.setSalary(1500L);
-		zookeeper.setOid(UUID.randomUUID());
+		//insert example data for Keeper_
+		Keeper_ keeper = new Keeper_();
+		keeper.setFirstName("Hans");
+		keeper.setLastName("Dampf");
+		keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2012",java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+		keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+		keeper.setBirthday(java.time.LocalDate.parse("01.01.1990",java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+		keeper.setSalary(1500L);
+		keeper.setOid(UUID.randomUUID());
 		
 		// Set relations
-		enclosure.setAnimals(new java.util.ArrayList<>(Arrays.asList(animal)));
-		animal.setKeeper(new java.util.ArrayList<>(Arrays.asList(zookeeper)));
+		enclosure.setAnimalList(new java.util.ArrayList<>(Arrays.asList(animal)));
+		animal.setKeeperList(new java.util.ArrayList<>(Arrays.asList(keeper)));
 		
 		//Save all example Entities in an order that won't cause errors
-		zookeeperRepo.save(zookeeper);
+		keeperRepo.save(keeper);
 		animalRepo.save(animal);
 		enclosureRepo.save(enclosure);
 		}
