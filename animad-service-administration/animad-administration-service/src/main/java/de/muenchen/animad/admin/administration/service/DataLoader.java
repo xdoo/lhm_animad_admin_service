@@ -10,10 +10,10 @@ import de.muenchen.animad.admin.administration.service.gen.domain.Animals_;
 import de.muenchen.animad.admin.administration.service.gen.domain.Enclosure_;
 import de.muenchen.animad.admin.administration.service.gen.domain.Features_;
 import de.muenchen.animad.admin.administration.service.gen.domain.Gender_;
-import de.muenchen.animad.admin.administration.service.gen.domain.Zookeeper_;
+import de.muenchen.animad.admin.administration.service.gen.domain.Keeper_;
 import de.muenchen.animad.admin.administration.service.rest.Animal_Repository;
 import de.muenchen.animad.admin.administration.service.rest.Enclosure_Repository;
-import de.muenchen.animad.admin.administration.service.rest.Zookeeper_Repository;
+import de.muenchen.animad.admin.administration.service.rest.Keeper_Repository;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +35,7 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     Animal_Repository animalRepo;
     @Autowired
-    Zookeeper_Repository zookeeperRepo;
+    Keeper_Repository keeperRepo;
 
     public void run(ApplicationArguments args) {
         testdatenErzeugen();
@@ -47,18 +47,19 @@ public class DataLoader implements ApplicationRunner {
 
         //insert example data for Enclosures
         Enclosure_ enclosure = new Enclosure_();
-        enclosure.setEnclosureID("Elephant's Paradise");
+        enclosure.setName("Elephant's Paradise");
         enclosure.setCleaningTime(java.time.LocalTime.parse("15:15:15", java.time.format.DateTimeFormatter.ofPattern("k:mm:ss")));
         enclosure.setOid(UUID.randomUUID());
 
         //insert example data for Zookeepers
-        Zookeeper_ zookeeper = new Zookeeper_();
-        zookeeper.setName("Claus");
-        zookeeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-        zookeeper.setCanDo(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
-        zookeeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-        zookeeper.setSalary(450L);
-        zookeeper.setOid(UUID.randomUUID());
+        Keeper_ keeper = new Keeper_();
+        keeper.setFirstName("Hans");
+        keeper.setLastName("Dampf");
+        keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSalary(450L);
+        keeper.setOid(UUID.randomUUID());
 
         // insert example data for Animals
         // Benjamin
@@ -84,14 +85,12 @@ public class DataLoader implements ApplicationRunner {
         List<Animal_> animals = new java.util.ArrayList<Animal_>(Arrays.asList(animal1, animal2));
         
         // Set relations
-        animal1.setKeeper(new java.util.ArrayList<>(Arrays.asList(zookeeper)));
-        animal2.setKeeper(new java.util.ArrayList<>(Arrays.asList(zookeeper)));
-        enclosure.setAnimals(animals);
+        animal1.setKeeperList(new java.util.ArrayList<>(Arrays.asList(keeper)));
+        animal2.setKeeperList(new java.util.ArrayList<>(Arrays.asList(keeper)));
+        enclosure.setAnimalList(animals);
 
         //Save all example Entities in an order that won't cause errors
-        //zookeeperRepo.save(zookeeper);
         enclosureRepo.save(enclosure);
-        //animalRepo.save(animal1);
 
     }
 }

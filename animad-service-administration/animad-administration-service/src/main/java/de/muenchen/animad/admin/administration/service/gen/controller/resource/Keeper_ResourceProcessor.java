@@ -7,8 +7,8 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceProcessor;
 import org.springframework.stereotype.Component;
 
-import de.muenchen.animad.admin.administration.service.gen.domain.Zookeeper_;
-import de.muenchen.animad.admin.administration.service.gen.services.resource.Zookeeper_ResourceService;
+import de.muenchen.animad.admin.administration.service.gen.domain.Keeper_;
+import de.muenchen.animad.admin.administration.service.gen.services.resource.Keeper_ResourceService;
 
 /*
  * This file will be overwritten on every change of the model!
@@ -18,16 +18,16 @@ import de.muenchen.animad.admin.administration.service.gen.services.resource.Zoo
  * This RessourceProcessor can alter Resources, before they are sent out.
  */
 @Component
-public class Zookeeper_ResourceProcessor implements ResourceProcessor<Resource<Zookeeper_>> {
+public class Keeper_ResourceProcessor implements ResourceProcessor<Resource<Keeper_>> {
 
 	/**
-	 * Service for processing Zookeeper_ entities.
+	 * Service for processing Keeper_ entities.
 	 */
 	@Autowired
-	Zookeeper_ResourceService resourceService;
+	Keeper_ResourceService resourceService;
 
 	@Override
-    public Resource<Zookeeper_> process(Resource<Zookeeper_> resource) {
+    public Resource<Keeper_> process(Resource<Keeper_> resource) {
 	    // Hand the resource to the service.
 		resourceService.process(resource);
         return resource;

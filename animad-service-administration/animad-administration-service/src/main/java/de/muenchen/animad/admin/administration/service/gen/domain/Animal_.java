@@ -81,11 +81,11 @@ public class Animal_ extends BaseEntity {
 	
 	
 	@OrderColumn(name="order_index")
-	@JoinTable(name = "Animal_Keeper", joinColumns = { @JoinColumn(name = "animal_oid")}, inverseJoinColumns = {@JoinColumn(name="keeper_oid")})
+	@JoinTable(name = "Animal_KeeperList", joinColumns = { @JoinColumn(name = "animal_oid")}, inverseJoinColumns = {@JoinColumn(name="keeperList_oid")})
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@NotNull
 	@Size(min = 1)
-	private java.util.List<Zookeeper_> keeper = new java.util.ArrayList<>();
+	private java.util.List<Keeper_> keeperList = new java.util.ArrayList<>();
 	
 	
 	@Column(name="alive")
@@ -146,12 +146,12 @@ public class Animal_ extends BaseEntity {
 	}
 	
 	
-	public java.util.List<Zookeeper_> getKeeper(){
-		return keeper;
+	public java.util.List<Keeper_> getKeeperList(){
+		return keeperList;
 	}
 	
-	public void setKeeper(java.util.List<Zookeeper_> keeper){
-		this.keeper = keeper;
+	public void setKeeperList(java.util.List<Keeper_> keeperList){
+		this.keeperList = keeperList;
 	}
 	
 	
@@ -185,7 +185,7 @@ public class Animal_ extends BaseEntity {
 			return false;
 		if (getWeight() != animal.getWeight())
 			return false;
-		if (getKeeper() != null ? !getKeeper().equals(animal.getKeeper()) : animal.getKeeper() != null)
+		if (getKeeperList() != null ? !getKeeperList().equals(animal.getKeeperList()) : animal.getKeeperList() != null)
 			return false;
 		if (isAlive() != animal.isAlive())
 			return false;
@@ -200,7 +200,7 @@ public class Animal_ extends BaseEntity {
 		result = 31 * result + (getBirthday() != null ? getBirthday().hashCode() : 0);
 		result = 31 * result + (getGender() != null ? getGender().hashCode() : 0);
 		result = 31 * result + (getWeight() != null ? getWeight().hashCode() : 0);
-		result = 31 * result + (getKeeper() != null ? getKeeper().hashCode() : 0);
+		result = 31 * result + (getKeeperList() != null ? getKeeperList().hashCode() : 0);
 		result = 31 * result + (isAlive() ? 1 : 0);
 		return result;
 	}
@@ -221,7 +221,7 @@ public class Animal_ extends BaseEntity {
 		s += "\njava.time.LocalDate birthday: " + getBirthday();
 		s += "\nGender_ gender: " + getGender();
 		s += "\nBigDecimal weight: " + getWeight();
-		s += "\njava.util.List<Zookeeper_> keeper: " + getKeeper();
+		s += "\njava.util.List<Keeper_> keeperList: " + getKeeperList();
 		s += "\nboolean alive: " + isAlive();
 		return s;
 	}

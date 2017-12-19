@@ -6,7 +6,7 @@
 	
 	create table Enclosure (
 	oid varchar(36),
-	enclosureid varchar(30) not null, 
+	name varchar(30) not null, 
 	cleaningtime datetime not null, 
 	primary key (oid));
 	
@@ -20,46 +20,47 @@
 	alive boolean not null, 
 	primary key (oid));
 	
-	create table Zookeeper (
+	create table Keeper (
 	oid varchar(36),
-	name varchar(30) not null, 
+	firstname varchar(30) not null, 
+	lastname varchar(30) not null, 
 	employmentdate datetime not null, 
 	birthday datetime not null, 
 	salary bigint not null, 
 	primary key (oid));
 	
-	--Enclosure_Animals Relation Table
-	create table Enclosure_Animals (
+	--Enclosure_AnimalList Relation Table
+	create table Enclosure_AnimalList (
 	enclosure_oid varchar(36) not null, 
-	animals_oid varchar(36) not null unique, 
+	animalList_oid varchar(36) not null unique, 
 	order_index bigint,
-	primary key ( enclosure_oid, animals_oid));
+	primary key ( enclosure_oid, animalList_oid));
 	
-	alter table Enclosure_Animals 
-	add constraint FK_enclosure_animals_TO_animals 
-	foreign key (animals_oid) 
+	alter table Enclosure_AnimalList 
+	add constraint FK_enclosure_animalList_TO_animalList 
+	foreign key (animalList_oid) 
 	references Animal(oid);
 	
-	alter table Enclosure_Animals 
-	add constraint FK_enclosure_animals_TO_enclosure 
+	alter table Enclosure_AnimalList 
+	add constraint FK_enclosure_animalList_TO_enclosure 
 	foreign key (enclosure_oid) 
 	references Enclosure(oid);
 	
 	
-	--Animal_Keeper Relation Table
-	create table Animal_Keeper (
+	--Animal_KeeperList Relation Table
+	create table Animal_KeeperList (
 	animal_oid varchar(36) not null, 
-	keeper_oid varchar(36) not null, 
+	keeperList_oid varchar(36) not null, 
 	order_index bigint,
-	primary key ( animal_oid, keeper_oid));
+	primary key ( animal_oid, keeperList_oid));
 	
-	alter table Animal_Keeper 
-	add constraint FK_animal_keeper_TO_keeper 
-	foreign key (keeper_oid) 
-	references Zookeeper(oid);
+	alter table Animal_KeeperList 
+	add constraint FK_animal_keeperList_TO_keeperList 
+	foreign key (keeperList_oid) 
+	references Keeper(oid);
 	
-	alter table Animal_Keeper 
-	add constraint FK_animal_keeper_TO_animal 
+	alter table Animal_KeeperList 
+	add constraint FK_animal_keeperList_TO_animal 
 	foreign key (animal_oid) 
 	references Animal(oid);
 	
