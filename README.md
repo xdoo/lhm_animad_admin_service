@@ -16,6 +16,7 @@ The animad backend - generated from the 'animad.barrakuda' model by the Barrakud
 * fix server port added to the service in application.yml: `server.port: 39146`
 
 # Build it
+* Copy the libraries from the folder 'mvn_repo' in your local '.m2' repository - these are not available in the maven central repository
 * Do a `mvn install -DskipTests`
 
 # Run it
