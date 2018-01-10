@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.muenchen</groupId>
+    <artifactId>muenchen-pom</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>Minimale Super-POM der Landeshauptstadt Muenchen - it@M</name>
+    <description>
+        Konfiguriert nur das absolut Notwendige.
+    </description>
+
+    <licenses>
+        <license>
+            <name>it@M-Lizenz</name>
+            <distribution>repo</distribution>
+            <comments>Keine OSS-Lizenz, Verwendung nur innerhalb von it@M</comments>
+        </license>
+    </licenses>
+    <organization>
+        <name>Landeshauptstadt Muenchen - it@M</name>
+        <url>http://www.muenchen.de/rathaus/Stadtverwaltung/Direktorium/IT-Beauftragte/Wir-ueber-Uns/ITatM.html</url>
+    </organization>
+
+    <ciManagement>
+        <system>SPS Jenkins</system>
+        <url>${address.jenkins}</url>
+    </ciManagement>
+
+    <issueManagement>
+        <system>ITM Mantis</system>
+        <url>${address.mantis}</url>
+    </issueManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.9.1</version>
+                    <configuration>
+                        <excludePackageNames>*.internal</excludePackageNames>
+                        <header><![CDATA[Direktorium<br><font size="-3">IT-Dienstleistungen</font>]]></header>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>2.6</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>de.muenchen</groupId>
+                            <artifactId>lizenz</artifactId>
+                            <version>1</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <excludes>
+                            <exclude>**/.*</exclude>
+                            <exclude>**/build-number.txt</exclude>
+                            <exclude>pom.xml</exclude>
+                        </excludes>
+                        <header>header.txt</header>
+                        <mapping>
+                            <java>SLASHSTAR_STYLE</java>
+                        </mapping>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>lhm-release-local</id>
+            <name>Landeshauptstadt Muenchen IT@M Releases</name>
+            <url>${address.repository}/lhm-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>lhm-snapshot-local</id>
+            <name>Landeshauptstadt Muenchen IT@M Snapshots</name>
+            <url>${address.repository}/lhm-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <properties>
+        <!-- Zeichensatz für Input und Output -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- URLs und URL-Präfixe -->
+        <address.svn>http://svnp001.srv.muenchen.de</address.svn>
+        <address.jenkins>http://seujavap001.srv.ha3.dir.muenchen.de/jenkins</address.jenkins>
+        <address.mantis>http://mantis.muenchen.de</address.mantis>
+        <address.repository>http://seujavap001.srv.ha3.dir.muenchen.de/artifactory</address.repository>
+    </properties>
+</project>

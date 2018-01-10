@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>de.muenchen</groupId>
+  <artifactId>Service-Lib</artifactId>
+  <versioning>
+    <versions>
+      <version>1.3-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20171120132351</lastUpdated>
+  </versioning>
+</metadata>

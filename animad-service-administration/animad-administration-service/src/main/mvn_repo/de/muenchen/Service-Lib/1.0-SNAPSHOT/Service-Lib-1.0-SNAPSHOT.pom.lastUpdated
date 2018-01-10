@@ -1,0 +1,10 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Mon Nov 20 14:35:38 CET 2017
+da39a3ee5e6b4b0d3255bfef95601890afd80709@default-http\://seujavap001.srv.ha3.dir.muenchen.de/artifactory/vaadin-addons-cache/.lastUpdated=1511184938126
+http\://repo1.maven.org/maven2/.error=
+http\://seujavap001.srv.ha3.dir.muenchen.de/artifactory/lhm-snapshot-local/.lastUpdated=1511184349369
+http\://repo1.maven.org/maven2/.lastUpdated=1511184349358
+da39a3ee5e6b4b0d3255bfef95601890afd80709@default-http\://seujavap001.srv.ha3.dir.muenchen.de/artifactory/ext-release-local/.lastUpdated=1511184938113
+http\://seujavap001.srv.ha3.dir.muenchen.de/artifactory/vaadin-addons-cache/.error=Could not transfer artifact de.muenchen\:Service-Lib\:pom\:1.0-SNAPSHOT from/to seujavap001a.srv.ha3.dir.muenchen.de-vaadinAddonsCache (http\://seujavap001.srv.ha3.dir.muenchen.de/artifactory/vaadin-addons-cache)\: Failed to transfer file\: http\://seujavap001.srv.ha3.dir.muenchen.de/artifactory/vaadin-addons-cache/de/muenchen/Service-Lib/1.0-SNAPSHOT/Service-Lib-1.0-SNAPSHOT.pom. Return code is\: 409 , ReasonPhrase\:Conflict.
+http\://seujavap001.srv.ha3.dir.muenchen.de/artifactory/lhm-snapshot-local/.error=
+http\://seujavap001.srv.ha3.dir.muenchen.de/artifactory/ext-release-local/.error=Could not transfer artifact de.muenchen\:Service-Lib\:pom\:1.0-SNAPSHOT from/to seujavap001a.srv.ha3.dir.muenchen.de-extReleaseLocal (http\://seujavap001.srv.ha3.dir.muenchen.de/artifactory/ext-release-local)\: Failed to transfer file\: http\://seujavap001.srv.ha3.dir.muenchen.de/artifactory/ext-release-local/de/muenchen/Service-Lib/1.0-SNAPSHOT/Service-Lib-1.0-SNAPSHOT.pom. Return code is\: 409 , ReasonPhrase\:Conflict.
