@@ -21,4 +21,4 @@ The animad backend - generated from the 'animad.barrakuda' model by the Barrakud
 
 # Run it
 * Do a `mvn spring-boot:run`
-* after that you can acces the service with your favorite REST client under e.g. http://localhost:39146/animals
+* after that you can acces the service with your favorite REST client under e.g. http://localhost:39146/
