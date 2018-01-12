@@ -16,8 +16,9 @@ The animad backend - generated from the 'animad.barrakuda' model by the Barrakud
 * fix server port added to the service in application.yml: `server.port: 39146`
 
 # Build it
+* Copy the libraries from the folder 'mvn_repo' in your local '.m2' repository - these are not available in the maven central repository
 * Do a `mvn install -DskipTests`
 
 # Run it
 * Do a `mvn spring-boot:run`
-* after that you can acces the service with your favorite REST client under e.g. http://localhost:39146/animals
+* after that you can acces the service with your favorite REST client under e.g. http://localhost:39146/
