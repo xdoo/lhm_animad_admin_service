@@ -16,7 +16,12 @@ The animad backend - generated from the 'animad.barrakuda' model by the Barrakud
 * fix server port added to the service in application.yml: `server.port: 39146`
 
 # Build it
-* Copy the libraries from the folder 'mvn_repo' in your local '.m2' repository - these are not available in the maven central repository
+* Copy the libraries from the folder 'mvn_repo' in your local '.m2' repository - these are not available in the maven central repository. In detail
+   * `API-Lib-1.0.jar` and `API-Lib-1.0.pom`: `mvn install:install-file -Dfile=API-Lib-1.0.jar -DpomFile=API-Lib-1.0.pom`
+   * `Auditing-1.0.jar` and `Auditing-1.0.pom`: `mvn install:install-file -Dfile=Auditing-1.0.jar -DpomFile=Auditing-1.0.pom`
+   * `Service-Lib-1.0.jar` and `Service-Lib-1.0.pom`: `mvn install:install-file -Dfile=Service-Lib-1.0.jar -DpomFile=Service-Lib-1.0.pom`
+   * `mkdir ~/.m2/repository/de/muenchen/gaia-common/1.0 && cp gaia-common-1.0.pom ~/.m2/repository/de/muenchen/gaia-common/1.0`
+   * `mkdir ~/.m2/repository/de/muenchen/muenchen-pom/1.0.0 && cp muenchen-pom-1.0.0.pom ~/.m2/repository/de/muenchen/muenchen-pom/1.0.0`
 * Do a `mvn install -DskipTests`
 
 # Run it
