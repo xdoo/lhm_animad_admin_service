@@ -8,7 +8,10 @@ import org.springframework.hateoas.ResourceProcessor;
 import org.springframework.stereotype.Component;
 
 import de.muenchen.animad.admin.administration.service.gen.domain.Animal_;
+import de.muenchen.animad.admin.administration.service.gen.domain.Keeper_;
 import de.muenchen.animad.admin.administration.service.gen.services.resource.Animal_ResourceService;
+import org.springframework.hateoas.EntityLinks;
+import org.springframework.hateoas.LinkBuilder;
 
 /*
  * This file will be overwritten on every change of the model!
@@ -25,9 +28,15 @@ public class Animal_ResourceProcessor implements ResourceProcessor<Resource<Anim
 	 */
 	@Autowired
 	Animal_ResourceService resourceService;
-
+        
+        @Autowired
+        EntityLinks links;
+        
 	@Override
     public Resource<Animal_> process(Resource<Animal_> resource) {
+        LinkBuilder builder = links.linkFor(Keeper_.class);
+        resource.add(builder.withRel("keepers"));
+        
 	    // Hand the resource to the service.
 		resourceService.process(resource);
         return resource;

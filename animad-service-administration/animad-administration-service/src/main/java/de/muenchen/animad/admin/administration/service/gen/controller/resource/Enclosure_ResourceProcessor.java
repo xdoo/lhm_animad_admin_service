@@ -1,6 +1,6 @@
 package de.muenchen.animad.admin.administration.service.gen.controller.resource;
 
-import java.util.Optional;
+import de.muenchen.animad.admin.administration.service.gen.domain.Animal_;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import de.muenchen.animad.admin.administration.service.gen.domain.Enclosure_;
 import de.muenchen.animad.admin.administration.service.gen.services.resource.Enclosure_ResourceService;
+import org.springframework.hateoas.EntityLinks;
+import org.springframework.hateoas.LinkBuilder;
 
 /*
  * This file will be overwritten on every change of the model!
@@ -26,10 +28,16 @@ public class Enclosure_ResourceProcessor implements ResourceProcessor<Resource<E
 	@Autowired
 	Enclosure_ResourceService resourceService;
 
+        @Autowired
+        EntityLinks links;
+        
 	@Override
     public Resource<Enclosure_> process(Resource<Enclosure_> resource) {
-	    // Hand the resource to the service.
-		resourceService.process(resource);
+        LinkBuilder builder = links.linkFor(Animal_.class);
+        resource.add(builder.withRel("animals"));
+        
+        // Hand the resource to the service.
+        resourceService.process(resource);
         return resource;
     }
     
