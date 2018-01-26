@@ -24,6 +24,6 @@ import de.muenchen.animad.admin.administration.service.gen.domain.Keeper_;
 */
 @RepositoryRestResource(exported = true,
 	path="keepers", collectionResourceRel="keepers")
-//@PreAuthorize("hasAuthority('administration_READ_Keeper')")
+@PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_READ_Keeper.name(), 'Entitlements')")
 public interface Keeper_Repository extends de.muenchen.animad.admin.administration.service.gen.rest.Generated_Keeper_Repository {
 }

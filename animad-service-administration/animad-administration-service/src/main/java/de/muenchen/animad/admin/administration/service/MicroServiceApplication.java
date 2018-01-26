@@ -12,13 +12,13 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
-import de.muenchen.service.security.OAuth2RestTemplateConfig;
+//import de.muenchen.service.security.OAuth2RestTemplateConfig;
 
 /**
  * Application class for starting the micro-service.
  */
 @Configuration
-@ComponentScan(basePackages = {"de.muenchen.animad.admin.administration.service", "de.muenchen.service", "de.muenchen.auditing"})
+@ComponentScan(basePackages = {"de.muenchen.animad.admin.administration.service", "de.muenchen.service", "de.muenchen.auditing", "de.muenchen.referenzarchitektur.authorisationLib"})
 @EntityScan(basePackages = {"de.muenchen.animad.admin.administration.service", "de.muenchen.service", "de.muenchen.auditing"})
 @EnableJpaRepositories(basePackages = {"de.muenchen.animad.admin.administration.service", "de.muenchen.service", "de.muenchen.auditing"})
 @EnableAutoConfiguration
@@ -26,7 +26,7 @@ import de.muenchen.service.security.OAuth2RestTemplateConfig;
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-@Import(OAuth2RestTemplateConfig.class)
+//@Import(OAuth2RestTemplateConfig.class)
 public class MicroServiceApplication {
 	
 	public static void main(String[] args) throws Exception {
