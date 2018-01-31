@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import de.muenchen.service.QueryService;
+import de.muenchen.service.QueryServiceChanged;
 import de.muenchen.animad.admin.administration.service.gen.domain.Keeper_;
 import de.muenchen.animad.admin.administration.service.rest.Keeper_Repository;
 
@@ -36,7 +36,7 @@ import de.muenchen.animad.admin.administration.service.rest.Keeper_Repository;
 public class Keeper_SearchController {
 		
     @Autowired
-    QueryService service;
+    QueryServiceChanged service;
 
     @Autowired
     Keeper_Repository repository;
@@ -68,6 +68,35 @@ public class Keeper_SearchController {
         final List<PersistentEntityResource> collect = keeperStream.map(assembler::toResource).collect(Collectors.toList());
         return new ResponseEntity<Object>(new Resources<>(collect), HttpStatus.OK);
 	}
+
+	@RequestMapping(method = RequestMethod.GET, value ="findFullTextJunction")
+    @ResponseBody
+    public ResponseEntity<?> findFullTextJunction(PersistentEntityResourceAssembler assembler, @Param("q") String q){ if (q == null)
+            q = "";
+
+        List<String> annotatedFields = new ArrayList<>();
+        Class tmpClass = Keeper_.class;
+        while (tmpClass != null) {
+            annotatedFields.addAll(Stream.of(tmpClass.getDeclaredFields())
+                    .filter(field -> field.isAnnotationPresent(org.hibernate.search.annotations.Field.class))
+                    .map(Field::getName)
+                    .collect(Collectors.toList()));
+            tmpClass = tmpClass.getSuperclass();
+        }
+
+
+
+        Stream<Keeper_> keeperStream;
+
+        try {
+            keeperStream = service.queryGitLike(q, Keeper_.class, annotatedFields.toArray(new String[annotatedFields.size()])).stream();
+        } catch (EmptyQueryException e) {
+            keeperStream = StreamSupport.stream(repository.findAll().spliterator(), false);
+        }
+
+        final List<PersistentEntityResource> collect = keeperStream.map(assembler::toResource).collect(Collectors.toList());
+        return new ResponseEntity<Object>(new Resources<>(collect), HttpStatus.OK);
+    }
 }
 
 
