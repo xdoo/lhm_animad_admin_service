@@ -33,7 +33,8 @@ public class QueryServiceChanged {
         return jpaQuery.getResultList();
     }
 
-    public <E extends BaseEntity> List<E> queryGitLike(String text, Class<E> entity, String[] properties) {
+    /* NEW START must be added to existing QueryService*/
+    public <E extends BaseEntity> List<E> queryJunction(String text, Class<E> entity, String[] properties) {
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
         QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
 
@@ -71,5 +72,6 @@ public class QueryServiceChanged {
 
         return query;
     }
+    /* NEW END */
 
 }

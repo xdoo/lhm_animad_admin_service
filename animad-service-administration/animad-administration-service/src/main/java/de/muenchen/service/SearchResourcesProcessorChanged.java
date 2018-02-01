@@ -17,8 +17,11 @@ public class SearchResourcesProcessorChanged implements ResourceProcessor<Reposi
 
     public RepositorySearchesResource process(RepositorySearchesResource repositorySearchesResource) {
         String search = repositorySearchesResource.getId().getHref();
+        /* NEW START - must be added to existing RepositorySearchesResource*/
         Link findFullTextLucene = (new Link(search + "/findFullTextJunction{?q}")).withRel("findFullTextJunction");
         repositorySearchesResource.add(findFullTextLucene);
+        /* NEW END */
+
         return repositorySearchesResource;
     }
 }

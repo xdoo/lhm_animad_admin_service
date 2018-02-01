@@ -69,6 +69,7 @@ public class Keeper_SearchController {
         return new ResponseEntity<Object>(new Resources<>(collect), HttpStatus.OK);
 	}
 
+	/* NEW START */
 	@RequestMapping(method = RequestMethod.GET, value ="findFullTextJunction")
     @ResponseBody
     public ResponseEntity<?> findFullTextJunction(PersistentEntityResourceAssembler assembler, @Param("q") String q){ if (q == null)
@@ -89,7 +90,7 @@ public class Keeper_SearchController {
         Stream<Keeper_> keeperStream;
 
         try {
-            keeperStream = service.queryGitLike(q, Keeper_.class, annotatedFields.toArray(new String[annotatedFields.size()])).stream();
+            keeperStream = service.queryJunction(q, Keeper_.class, annotatedFields.toArray(new String[annotatedFields.size()])).stream();
         } catch (EmptyQueryException e) {
             keeperStream = StreamSupport.stream(repository.findAll().spliterator(), false);
         }
@@ -97,6 +98,7 @@ public class Keeper_SearchController {
         final List<PersistentEntityResource> collect = keeperStream.map(assembler::toResource).collect(Collectors.toList());
         return new ResponseEntity<Object>(new Resources<>(collect), HttpStatus.OK);
     }
+    /* NEW END */
 }
 
 
