@@ -63,4 +63,10 @@ server.port: 39146
 ---
 spring:
     profiles: vm
+---
+spring:
+    profiles: no-security
+    h2.console.enabled: true
+server.port: 39146
 
+security.ignored: /**

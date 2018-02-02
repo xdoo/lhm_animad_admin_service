@@ -182,4 +182,34 @@ flyway.locations: db/migration/common
 # you have to define an environment variable with the address of
 # the discovery service.
 eureka.client.serviceUrl.defaultZone: http://${eureka.address}:8761/eureka/
-
+---
+spring:
+  profiles: no-security
+  # DB
+  # --- 
+  # in memory db for local use
+  # 
+  datasource:
+    url: jdbc:h2:mem:animad
+    username: sa
+    password:
+  #JPA
+  jpa:
+    database: H2
+    hibernate:
+        # always drop and create the db should be the best
+        # configuration for local (development) mode. this 
+        # is also the default, that spring offers by convention.
+        # but here explicite:
+        ddl-auto: create-drop
+# random server port to avoid port 
+# conflicts on localhost
+server.port: 0
+# database specific DDL location
+flyway.locations: db/migration/common
+eureka.client:
+    # in local mode you have to run your service 
+    # discovery on localhost (you also can run the 
+    # cloud infrastructure on your local docker host)
+    serviceUrl.defaultZone: http://localhost:8761/eureka/
+    registry-fetch-interval-seconds: 5
