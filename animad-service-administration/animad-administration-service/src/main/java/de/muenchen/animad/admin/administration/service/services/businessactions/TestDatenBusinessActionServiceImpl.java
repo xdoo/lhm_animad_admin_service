@@ -19,7 +19,7 @@ import de.muenchen.animad.admin.administration.service.rest.Animal_Repository;
 import de.muenchen.animad.admin.administration.service.gen.domain.Keeper_;
 import de.muenchen.animad.admin.administration.service.rest.Keeper_Repository;
 
-import de.muenchen.service.security.UserInfo;
+//import de.muenchen.service.security.UserInfo;
 
 /**
  * Provides a service to execute business-actions.

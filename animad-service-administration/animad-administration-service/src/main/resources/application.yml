@@ -32,21 +32,20 @@ logging.level.com.netflix.discovery : 'OFF'
 #Wiremock
 URL : http://localhost:8089/
 
-# Security
-#security.oauth2.resource.userInfoUri: http://AUTHSERVICE/uaa/user
-#security.oauth2.resource.preferTokenInfo: false
-#security.ignored: /**
 
 security:
+  basic:
+    enabled: false
   oauth2:
-    client:
-      clientId: openIdDemo
-      clientSecret: b0c2bbe0-ba2f-454c-85ad-59a08cc09e6c
-    resource:
-      userInfoUri: http://localhost:8080/auth/realms/demo/protocol/openid-connect/userinfo        
-    #added for Entitlements API
     entitlements:
-      entitlementsUri: http://localhost:8080/auth/realms/demo/authz/entitlement/openIdDemo      
+      entitlementsUri: http://localhost:4000/auth/realms/demo/authz/entitlement/openIdDemo    
+    resource:
+      filter-order: 3
+      jwt:
+        key-value: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgVRpaNU0MgP7zSpGC4i0YHuUVuS3iU9RGgvUdUxJNpaNHUVAaPUjOwWseWpjgZrQqlpUm/DA0wE7f5TrwH+cCPabUTRhE0LYOyL/Y5C3ZKezQM6/3EDtIptafixbTpjvvEAJBSSFu1tlTwruePWe6GQEm0euzUWwqLRTRV2eHbwg+KTJFY8401u1nf4nBs5F2pS8uGIuGed/yz6+Nw+fgykoQ8Khqp4NKg0yC7h8Bpj8O/PBSROsKYp5ociZcEnAaKAoCA3jWmgfX+PVYym70ktPEr78KBLNVPGF7mV21BIdXbgqyKa5h5M6SCqEgqusBIjkTQmcUN9C7ZL4ea+fTQIDAQAB
+    client:
+      client-id: openIdDemo
+
 
 logging:
     level:
