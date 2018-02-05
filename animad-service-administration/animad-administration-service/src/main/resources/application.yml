@@ -23,7 +23,7 @@ service:
         name: Administration
         version: v0.1
     configuration:
-        maxSearchResults: 3
+        maxSearchResults: 2
 
 # Let flyway recreate the DB if validation fails.
 flyway.clean-on-validation-error : true
