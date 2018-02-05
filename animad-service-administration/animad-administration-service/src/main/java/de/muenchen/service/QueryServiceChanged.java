@@ -68,7 +68,6 @@ public class QueryServiceChanged {
             return jpaQuery.getResultList();
         } catch (Exception ex) {
             System.out.println("queryJunction: "+ex.getMessage());
-//            ex.printStackTrace();
             List<E> results = new ArrayList<E>();
             return results;
         }
