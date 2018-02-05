@@ -34,40 +34,65 @@ public class QueryServiceChanged {
     }
 
     /* NEW START must be added to existing QueryService*/
+
+    /**
+     * Creates Search Query that supports Apache Lucene Terms (single terms and phrases).
+     * Not supported are wildcards, Boolean Operators, Fuzzy, Range and Proximity Searches.
+     * (see: https://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
+     * @param text The given search query containing single terms and phrases.
+     * @param entity The entity to search
+     * @param properties The fieldnames of the entity that where generated as searchable fields (see Barrakuda documentation)
+     * @param <E> The entity type to search for
+     * @return A list of entities that where found for the given query
+     */
     public <E extends BaseEntity> List<E> queryJunction(String text, Class<E> entity, String[] properties) {
-        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
-        QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+        try {
+            FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
+            QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
 
-        List<String> props = new ArrayList<>();
-        String[] queries;
+            List<String> props = new ArrayList<>();
+            String[] queries;
 
-        Query query = null;
-        BooleanJunction boolJunction = queryBuilder.bool();
+            Query query = null;
+            BooleanJunction boolJunction = queryBuilder.bool();
 
-        // Loop over all queries and join them together
-        queries = text.split(" ");
-        for (int i = 0; i < queries.length; i++) {
-            query = createSingleQuery(queries[i], queryBuilder, properties);
-            boolJunction = boolJunction.must(query);
+            // Loop over all queries and join them together
+            queries = text.split(" ");
+            for (int i = 0; i < queries.length; i++) {
+                query = createSingleQuery(queries[i], queryBuilder, properties);
+                boolJunction = boolJunction.must(query);
+            }
+
+            query = boolJunction.createQuery();
+            FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, new Class[]{entity});
+            return jpaQuery.getResultList();
+        } catch (Exception ex) {
+            System.out.println("queryJunction: "+ex.getMessage());
+//            ex.printStackTrace();
+            List<E> results = new ArrayList<E>();
+            return results;
         }
-
-        query = boolJunction.createQuery();
-        FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, new Class[]{entity});
-        return jpaQuery.getResultList();
     }
 
-    private Query createSingleQuery(String text, QueryBuilder queryBuilder, String[] properties) {
+    /**
+     * Creates a {@link org.apache.lucene.search.Query} for the given term.
+     *
+     * @param term A lucene term (single term or phrase)
+     * @param queryBuilder A builder to create a {@link org.apache.lucene.search.Query} for a single term
+     * @param properties The fieldnames of the entity that where generated as searchable fields
+     * @return A Query created for the given term
+     */
+    private Query createSingleQuery(String term, QueryBuilder queryBuilder, String[] properties) {
         Query query;
-        String[] termValues;
+        String[] termValues = term.split(":");
 
-        if (text.contains(":")) {
+        if (termValues.length > 1 && termValues[1] != "") {
             // if query equals to fieldName:value use Term to search
-            termValues = text.split(":");
             query = new TermQuery(new Term(termValues[0], termValues[1]));
         }
         else {
             // Otherwise search in all fields
-            query = queryBuilder.keyword().onFields(properties).matching(text).createQuery();
+            query = queryBuilder.keyword().onFields(properties).matching(term).createQuery();
         }
 
         return query;
