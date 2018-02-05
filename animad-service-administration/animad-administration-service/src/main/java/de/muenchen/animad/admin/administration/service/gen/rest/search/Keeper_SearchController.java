@@ -1,6 +1,7 @@
 package de.muenchen.animad.admin.administration.service.gen.rest.search;
 
 
+import de.muenchen.animad.admin.administration.service.gen.exceptions.TooManyResultsException;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.ArrayList;
@@ -72,9 +73,9 @@ public class Keeper_SearchController {
 	/* NEW START */
 	@RequestMapping(method = RequestMethod.GET, value ="findFullTextJunction")
     @ResponseBody
-    public ResponseEntity<?> findFullTextJunction(PersistentEntityResourceAssembler assembler, @Param("q") String q){ if (q == null)
+    public ResponseEntity<?> findFullTextJunction(PersistentEntityResourceAssembler assembler, @Param("q") String q) throws TooManyResultsException { 
+        if (q == null)
             q = "";
-
         List<String> annotatedFields = new ArrayList<>();
         Class tmpClass = Keeper_.class;
         while (tmpClass != null) {
@@ -96,7 +97,7 @@ public class Keeper_SearchController {
         }
 
         final List<PersistentEntityResource> collect = keeperStream.map(assembler::toResource).collect(Collectors.toList());
-        return new ResponseEntity<Object>(new Resources<>(collect), HttpStatus.OK);
+        return new ResponseEntity<>(new Resources<>(collect), HttpStatus.OK);
     }
     /* NEW END */
 }

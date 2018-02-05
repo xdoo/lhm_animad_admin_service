@@ -1,6 +1,7 @@
 
 package de.muenchen.service;
 
+import de.muenchen.animad.admin.administration.service.gen.exceptions.TooManyResultsException;
 import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +15,7 @@ import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.BooleanJunction;
 import org.hibernate.search.query.dsl.QueryBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,6 +23,9 @@ import org.springframework.stereotype.Repository;
 public class QueryServiceChanged {
     @PersistenceContext
     EntityManager entityManager;
+    
+    @Value("${service.configuration.maxSearchResults}")
+    Integer maxSearchResults;
 
     public QueryServiceChanged() {
     }
@@ -34,10 +39,10 @@ public class QueryServiceChanged {
     }
 
     /* NEW START must be added to existing QueryService*/
-    public <E extends BaseEntity> List<E> queryJunction(String text, Class<E> entity, String[] properties) {
+    public <E extends BaseEntity> List<E> queryJunction(String text, Class<E> entity, String[] properties) throws TooManyResultsException {
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
         QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
-
+    
         List<String> props = new ArrayList<>();
         String[] queries;
 
@@ -53,6 +58,7 @@ public class QueryServiceChanged {
 
         query = boolJunction.createQuery();
         FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, new Class[]{entity});
+        if (jpaQuery.getResultSize() >= maxSearchResults) throw new TooManyResultsException(maxSearchResults);
         return jpaQuery.getResultList();
     }
 
