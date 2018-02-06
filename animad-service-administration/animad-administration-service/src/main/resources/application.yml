@@ -22,6 +22,8 @@ service:
         oid: ANIMAD-ADMINISTRATION
         name: Administration
         version: v0.1
+    configuration:
+        maxSearchResults: 3
 
 # Let flyway recreate the DB if validation fails.
 flyway.clean-on-validation-error : true

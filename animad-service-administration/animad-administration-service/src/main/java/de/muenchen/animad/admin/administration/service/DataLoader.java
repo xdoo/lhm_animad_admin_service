@@ -92,7 +92,7 @@ public class DataLoader implements ApplicationRunner {
         //Save all example Entities in an order that won't cause errors
         enclosureRepo.save(enclosure);
 
-        keeper.setFirstName("Berta");
+        keeper.setFirstName("Abcd");
         keeper.setLastName("Bla");
         keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
@@ -101,7 +101,7 @@ public class DataLoader implements ApplicationRunner {
         keeper.setOid(UUID.randomUUID());
 	keeperRepo.save(keeper);
 
-        keeper.setFirstName("Carla");
+        keeper.setFirstName("Abcd");
         keeper.setLastName("Cro");
         keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
@@ -110,7 +110,7 @@ public class DataLoader implements ApplicationRunner {
         keeper.setOid(UUID.randomUUID());
 	keeperRepo.save(keeper);
 
-        keeper.setFirstName("Diana");
+        keeper.setFirstName("Abcd");
         keeper.setLastName("Dom");
         keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
