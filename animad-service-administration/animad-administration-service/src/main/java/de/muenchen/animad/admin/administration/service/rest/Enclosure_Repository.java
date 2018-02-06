@@ -23,6 +23,6 @@ import de.muenchen.animad.admin.administration.service.gen.domain.Enclosure_;
 */
 @RepositoryRestResource(exported = true,
 	path="enclosures", collectionResourceRel="enclosures")
-//@PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_READ_Enclosure.name(), 'Entitlements')")
+@PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_READ_Enclosure.name(), 'Entitlements')")
 public interface Enclosure_Repository extends de.muenchen.animad.admin.administration.service.gen.rest.Generated_Enclosure_Repository {
 }
