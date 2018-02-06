@@ -92,7 +92,7 @@ public class TestDatenBusinessActionServiceImpl implements TestDatenBusinessActi
         keeper.setFirstName("Hans");
         keeper.setLastName("Dampf");
         keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning, Features_.feeding)));
         keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         keeper.setSalary(450L);
         keeper.setOid(UUID.randomUUID());
@@ -127,6 +127,96 @@ public class TestDatenBusinessActionServiceImpl implements TestDatenBusinessActi
 
         //Save all example Entities in an order that won't cause errors
         enclosureRepo.save(enclosure);
+
+        keeper.setFirstName("Abcd");
+        keeper.setLastName("Bla");
+        keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSalary(1250L);
+        keeper.setOid(UUID.randomUUID());
+	keeperRepo.save(keeper);
+
+        keeper.setFirstName("Abcd");
+        keeper.setLastName("Cro");
+        keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSalary(550L);
+        keeper.setOid(UUID.randomUUID());
+	keeperRepo.save(keeper);
+
+        keeper.setFirstName("Abcd");
+        keeper.setLastName("Dom");
+        keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSalary(1750L);
+        keeper.setOid(UUID.randomUUID());
+	keeperRepo.save(keeper);
+
+        keeper.setFirstName("Eleni");
+        keeper.setLastName("Ess");
+        keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSalary(1200L);
+        keeper.setOid(UUID.randomUUID());
+	keeperRepo.save(keeper);
+
+        keeper.setFirstName("Frauke");
+        keeper.setLastName("Fur");
+        keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSalary(2450L);
+        keeper.setOid(UUID.randomUUID());
+	keeperRepo.save(keeper);
+
+        keeper.setFirstName("Gerda");
+        keeper.setLastName("Gla");
+        keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSalary(750L);
+        keeper.setOid(UUID.randomUUID());
+	keeperRepo.save(keeper);
+
+        keeper.setFirstName("Ilona");
+        keeper.setLastName("Ill");
+        keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSalary(1250L);
+        keeper.setOid(UUID.randomUUID());
+	keeperRepo.save(keeper);
+
+        keeper.setFirstName("Karla");
+        keeper.setLastName("Kas");
+        keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSalary(950L);
+        keeper.setOid(UUID.randomUUID());
+	keeperRepo.save(keeper);
+
+        keeper.setFirstName("Laura");
+        keeper.setLastName("Lob");
+        keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSalary(2450L);
+        keeper.setOid(UUID.randomUUID());
+	keeperRepo.save(keeper);
+
+        keeper.setFirstName("Micha");
+        keeper.setLastName("Mus");
+        keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
+        keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        keeper.setSalary(1450L);
+        keeper.setOid(UUID.randomUUID());
+	keeperRepo.save(keeper);
 		}
 
 }
