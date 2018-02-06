@@ -70,7 +70,7 @@ public class QueryServiceChanged {
 
             query = boolJunction.createQuery();
             FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, new Class[]{entity});
-            if (jpaQuery.getResultSize() >= maxSearchResults) throw new TooManyResultsException(maxSearchResults);
+            if (jpaQuery.getResultSize() > maxSearchResults) throw new TooManyResultsException(maxSearchResults);
             return jpaQuery.getResultList();
         } catch (ArrayIndexOutOfBoundsException ex) {
             System.out.println("queryJunction: "+ex.getMessage());
