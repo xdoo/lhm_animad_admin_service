@@ -3,6 +3,8 @@ package de.muenchen.service;
 
 import de.muenchen.animad.admin.administration.service.gen.exceptions.TooManyResultsException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -56,13 +58,14 @@ public class QueryServiceChanged {
             QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
 
             List<String> props = new ArrayList<>();
-            String[] queries;
+            List<String> queries = new ArrayList<>();
+            String[] queries = this.getQueries(text);
 
             Query query = null;
             BooleanJunction boolJunction = queryBuilder.bool();
 
             // Loop over all queries and join them together
-            queries = text.split(" ");
+//            queries = text.split(" ");
             for (int i = 0; i < queries.length; i++) {
                 query = createSingleQuery(queries[i], queryBuilder, properties);
                 boolJunction = boolJunction.must(query);
@@ -77,6 +80,41 @@ public class QueryServiceChanged {
             List<E> results = new ArrayList<E>();
             return results;
         }
+    }
+
+    /**
+     * Splits search text string into queries using regular expression: (\\S*:\".+\"|\"[^\"]+\"|\\S*)(?:\\s*).*
+     * Will match the following queries: value, "value with/without blank", fieldName:value, fieldName:"value with/without blank"
+     *
+     * Example:
+     * Search text string "van der Damme" name:"de Blanc" name:Maier Maier
+     * will be splitted into: "van der Damme", name:"de Blanc", name:Maier, Maier
+     * 
+     * @param s The search text string
+     * @return The search text string splitted into queries
+     */
+    private String[] getQueries(String s){
+        ArrayList<String> l = new ArrayList<String>();
+        Pattern p = Pattern.compile("(\\S*:\".+\"|\"[^\"]+\"|\\S*)(?:\\s*).*");
+        int start = 0;
+        int end = s.length();
+        int j = 0;
+
+        Matcher mtch = p.matcher(s);
+        while (start < end) {
+            mtch.region(start, end);
+            mtch.matches();
+            j = mtch.groupCount();
+            String group = mtch.group(j);
+            l.add(group);
+            start += (group.length()+1);
+        }
+
+        String[] queries = new String[l.size()];
+        l.toArray(queries);
+
+        return queries;
+
     }
 
     /**
