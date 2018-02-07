@@ -120,6 +120,10 @@
            <version>12.1.0.2.0</version>
         </dependency> 
         -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
         <!-- Datenbank -->
 		
         <!-- Validation -->
