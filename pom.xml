@@ -18,6 +18,7 @@
     	<module>infrastructure-service-config</module>
 	<module>infrastructure-service-registry</module>
         -->
+	<module>animad-service-administration</module>
         <!--
 	<module>animad-gui-keeperinterface</module>
 	-->
