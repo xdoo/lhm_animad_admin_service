@@ -58,7 +58,7 @@ public class QueryServiceChanged {
             QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
 
             List<String> props = new ArrayList<>();
-            List<String> queries = new ArrayList<>();
+//            List<String> queries = new ArrayList<>();
             String[] queries = this.getQueries(text);
 
             Query query = null;
@@ -89,7 +89,7 @@ public class QueryServiceChanged {
      * Example:
      * Search text string "van der Damme" name:"de Blanc" name:Maier Maier
      * will be splitted into: "van der Damme", name:"de Blanc", name:Maier, Maier
-     * 
+     *
      * @param s The search text string
      * @return The search text string splitted into queries
      */
