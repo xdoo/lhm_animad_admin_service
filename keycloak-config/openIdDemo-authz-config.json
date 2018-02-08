@@ -1,0 +1,177 @@
+{
+  "allowRemoteResourceManagement": false,
+  "policyEnforcementMode": "ENFORCING",
+  "resources": [
+    {
+      "name": "administration_WRITE_Animal",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    },
+    {
+      "name": "administration_DELETE_Animal",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    },
+    {
+      "name": "administration_DELETE_Enclosure",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    },
+    {
+      "name": "administration_DELETE_Keeper",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    },
+    {
+      "name": "administration_READ_Animal",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    },
+    {
+      "name": "administration_READ_Enclosure",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    },
+    {
+      "name": "administration_READ_Keeper",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    },
+    {
+      "name": "administration_WRITE_Enclosure",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    },
+    {
+      "name": "administration_WRITE_Keeper",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    },
+    {
+      "name": "administration_BUSINESSACTION_CreateAppointment",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    }
+  ],
+  "policies": [
+    {
+      "name": "rolepolicy_admin",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"openIdDemo/clientrole_admin\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "rolepolicy_readonly",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"openIdDemo/clientrole_readonly\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "permission_administration_DELETE_Animal",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"administration_DELETE_Animal\"]",
+        "applyPolicies": "[\"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_administration_DELETE_Enclosure",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"administration_DELETE_Enclosure\"]",
+        "applyPolicies": "[\"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_administration_DELETE_Keeper",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"administration_DELETE_Keeper\"]",
+        "applyPolicies": "[\"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_administration_WRITE_Animal",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"administration_WRITE_Animal\"]",
+        "applyPolicies": "[\"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_administration_WRITE_Enclosure",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"administration_WRITE_Enclosure\"]",
+        "applyPolicies": "[\"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_administration_WRITE_Keeper",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"administration_WRITE_Keeper\"]",
+        "applyPolicies": "[\"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_administration_READ_Animal",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"administration_READ_Animal\"]",
+        "applyPolicies": "[\"rolepolicy_admin\",\"rolepolicy_readonly\"]"
+      }
+    },
+    {
+      "name": "permission_administration_READ_Enclosure",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"administration_READ_Enclosure\"]",
+        "applyPolicies": "[\"rolepolicy_admin\",\"rolepolicy_readonly\"]"
+      }
+    },
+    {
+      "name": "permission_administration_READ_Keeper",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"administration_READ_Keeper\"]",
+        "applyPolicies": "[\"rolepolicy_admin\",\"rolepolicy_readonly\"]"
+      }
+    },
+    {
+      "name": "permission_administration_BUSINESSACTION_CreateAppointment",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"administration_BUSINESSACTION_CreateAppointment\"]",
+        "applyPolicies": "[\"rolepolicy_admin\"]"
+      }
+    }
+  ],
+  "scopes": []
+}

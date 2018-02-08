@@ -51,7 +51,7 @@ public interface Generated_Keeper_Repository extends CrudRepository<Keeper_, UUI
 	 */
 	@Override
 	@CachePut(value = CACHE, key = "#p0.oid")
-	//@PreAuthorize("hasAuthority('administration_WRITE_Keeper')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_WRITE_Keeper.name(), 'Entitlements')")
 	<S extends Keeper_> S save(S keeper);
 	
 	/**
@@ -61,7 +61,7 @@ public interface Generated_Keeper_Repository extends CrudRepository<Keeper_, UUI
 	 */
 	@Override
 	@CacheEvict(value = CACHE, key = "#p0")
-	//@PreAuthorize("hasAuthority('administration_DELETE_Keeper')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Keeper.name(), 'Entitlements')")
 	void delete(UUID oid);
 	
 	/**
@@ -71,7 +71,7 @@ public interface Generated_Keeper_Repository extends CrudRepository<Keeper_, UUI
 	 */
 	@Override
 	@CacheEvict(value = CACHE, key = "#p0.oid")
-	//@PreAuthorize("hasAuthority('administration_DELETE_Keeper')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Keeper.name(), 'Entitlements')")
 	void delete(Keeper_ entity);
 	
 	/**
@@ -81,7 +81,7 @@ public interface Generated_Keeper_Repository extends CrudRepository<Keeper_, UUI
 	 */
 	@Override
 	@CacheEvict(value = CACHE, allEntries = true)
-	//@PreAuthorize("hasAuthority('administration_DELETE_Keeper')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Keeper.name(), 'Entitlements')")
 	void delete(Iterable<? extends Keeper_> entities);
 	
 	/**
@@ -89,7 +89,7 @@ public interface Generated_Keeper_Repository extends CrudRepository<Keeper_, UUI
 	 */
 	@Override
 	@CacheEvict(value = CACHE, allEntries = true)
-	//@PreAuthorize("hasAuthority('administration_DELETE_Keeper')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Keeper.name(), 'Entitlements')")
 	void deleteAll();
 	
 	Keeper_ findByFirstName(@Param(value= "firstName") String firstName);

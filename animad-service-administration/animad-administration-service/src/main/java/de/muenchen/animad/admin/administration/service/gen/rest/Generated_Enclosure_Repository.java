@@ -50,7 +50,7 @@ public interface Generated_Enclosure_Repository extends CrudRepository<Enclosure
 	 */
 	@Override
 	@CachePut(value = CACHE, key = "#p0.oid")
-	//@PreAuthorize("hasAuthority('administration_WRITE_Enclosure')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_WRITE_Enclosure.name(), 'Entitlements')")
 	<S extends Enclosure_> S save(S enclosure);
 	
 	/**
@@ -60,7 +60,7 @@ public interface Generated_Enclosure_Repository extends CrudRepository<Enclosure
 	 */
 	@Override
 	@CacheEvict(value = CACHE, key = "#p0")
-	//@PreAuthorize("hasAuthority('administration_DELETE_Enclosure')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Enclosure.name(), 'Entitlements')")
 	void delete(UUID oid);
 	
 	/**
@@ -70,7 +70,7 @@ public interface Generated_Enclosure_Repository extends CrudRepository<Enclosure
 	 */
 	@Override
 	@CacheEvict(value = CACHE, key = "#p0.oid")
-	//@PreAuthorize("hasAuthority('administration_DELETE_Enclosure')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Enclosure.name(), 'Entitlements')")
 	void delete(Enclosure_ entity);
 	
 	/**
@@ -80,7 +80,7 @@ public interface Generated_Enclosure_Repository extends CrudRepository<Enclosure
 	 */
 	@Override
 	@CacheEvict(value = CACHE, allEntries = true)
-	//@PreAuthorize("hasAuthority('administration_DELETE_Enclosure')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Enclosure.name(), 'Entitlements')")
 	void delete(Iterable<? extends Enclosure_> entities);
 	
 	/**
@@ -88,7 +88,7 @@ public interface Generated_Enclosure_Repository extends CrudRepository<Enclosure
 	 */
 	@Override
 	@CacheEvict(value = CACHE, allEntries = true)
-	//@PreAuthorize("hasAuthority('administration_DELETE_Enclosure')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Enclosure.name(), 'Entitlements')")
 	void deleteAll();
 	
 	Enclosure_ findByName(@Param(value= "name") String name);
