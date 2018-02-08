@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.search.PhraseQuery;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
@@ -51,35 +52,32 @@ public class QueryServiceChanged {
      * @param properties The fieldnames of the entity that where generated as searchable fields (see Barrakuda documentation)
      * @param <E> The entity type to search for
      * @return A list of entities that where found for the given query
+     * @throws TooManyResultsException if the number of results exceeds service.configuration.maxSearchResults
      */
     public <E extends BaseEntity> List<E> queryJunction(String text, Class<E> entity, String[] properties) throws TooManyResultsException {
-        try {
-            FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
-            QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
 
+        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
+        QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+        Query query = null;
+        if (text != null && text.length() > 0) {
             List<String> props = new ArrayList<>();
-//            List<String> queries = new ArrayList<>();
             String[] queries = this.getQueries(text);
 
-            Query query = null;
             BooleanJunction boolJunction = queryBuilder.bool();
 
             // Loop over all queries and join them together
-//            queries = text.split(" ");
             for (int i = 0; i < queries.length; i++) {
                 query = createSingleQuery(queries[i], queryBuilder, properties);
                 boolJunction = boolJunction.must(query);
             }
-
             query = boolJunction.createQuery();
-            FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, new Class[]{entity});
-            if (jpaQuery.getResultSize() > maxSearchResults) throw new TooManyResultsException(maxSearchResults);
-            return jpaQuery.getResultList();
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            System.out.println("queryJunction: "+ex.getMessage());
-            List<E> results = new ArrayList<E>();
-            return results;
         }
+        else {
+            query = createSingleQuery("", queryBuilder, properties);
+        }
+        FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, new Class[]{entity});
+        if (jpaQuery.getResultSize() > maxSearchResults) throw new TooManyResultsException(maxSearchResults);
+        return jpaQuery.getResultList();
     }
 
     /**
@@ -95,6 +93,7 @@ public class QueryServiceChanged {
      */
     private String[] getQueries(String s){
         ArrayList<String> l = new ArrayList<String>();
+        // Regular expression pattern searches for fieldName:"value" or "value" or expression that equals to value or fieldname:value
         Pattern p = Pattern.compile("(\\S*:\".+\"|\"[^\"]+\"|\\S*)(?:\\s*).*");
         int start = 0;
         int end = s.length();
@@ -130,8 +129,13 @@ public class QueryServiceChanged {
         String[] termValues = term.split(":");
 
         if (termValues.length > 1 && termValues[1] != "") {
-            // if query equals to fieldName:value use Term to search
-            query = new TermQuery(new Term(termValues[0], termValues[1]));
+            // if query equals to fieldName:value use phrase query to search
+            if (termValues[1].startsWith("\"") && termValues[1].endsWith("\"")) {
+                // remove surrounding "
+                int end = termValues[1].length() - 1;
+                termValues[1] = termValues[1].substring(1, end);
+            }
+            query = queryBuilder.phrase().onField(termValues[0]).sentence(termValues[1]).createQuery();
         }
         else {
             // Otherwise search in all fields
