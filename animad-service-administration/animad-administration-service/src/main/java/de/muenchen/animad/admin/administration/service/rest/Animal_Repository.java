@@ -26,6 +26,6 @@ import de.muenchen.animad.admin.administration.service.gen.domain.Animal_;
 */
 @RepositoryRestResource(exported = true,
 	path="animals", collectionResourceRel="animals")
-//@PreAuthorize("hasAuthority('administration_READ_Animal')")
+@PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_READ_Animal.name(), 'Entitlements')")
 public interface Animal_Repository extends de.muenchen.animad.admin.administration.service.gen.rest.Generated_Animal_Repository {
 }

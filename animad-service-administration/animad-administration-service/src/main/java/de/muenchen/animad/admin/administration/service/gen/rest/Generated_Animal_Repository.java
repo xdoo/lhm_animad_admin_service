@@ -53,7 +53,7 @@ public interface Generated_Animal_Repository extends CrudRepository<Animal_, UUI
 	 */
 	@Override
 	@CachePut(value = CACHE, key = "#p0.oid")
-	//@PreAuthorize("hasAuthority('administration_WRITE_Animal')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_WRITE_Animal.name(), 'Entitlements')")
 	<S extends Animal_> S save(S animal);
 	
 	/**
@@ -63,7 +63,7 @@ public interface Generated_Animal_Repository extends CrudRepository<Animal_, UUI
 	 */
 	@Override
 	@CacheEvict(value = CACHE, key = "#p0")
-	//@PreAuthorize("hasAuthority('administration_DELETE_Animal')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Animal.name(), 'Entitlements')")
 	void delete(UUID oid);
 	
 	/**
@@ -73,7 +73,7 @@ public interface Generated_Animal_Repository extends CrudRepository<Animal_, UUI
 	 */
 	@Override
 	@CacheEvict(value = CACHE, key = "#p0.oid")
-	//@PreAuthorize("hasAuthority('administration_DELETE_Animal')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Animal.name(), 'Entitlements')")
 	void delete(Animal_ entity);
 	
 	/**
@@ -83,7 +83,7 @@ public interface Generated_Animal_Repository extends CrudRepository<Animal_, UUI
 	 */
 	@Override
 	@CacheEvict(value = CACHE, allEntries = true)
-	//@PreAuthorize("hasAuthority('administration_DELETE_Animal')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Animal.name(), 'Entitlements')")
 	void delete(Iterable<? extends Animal_> entities);
 	
 	/**
@@ -91,7 +91,7 @@ public interface Generated_Animal_Repository extends CrudRepository<Animal_, UUI
 	 */
 	@Override
 	@CacheEvict(value = CACHE, allEntries = true)
-	//@PreAuthorize("hasAuthority('administration_DELETE_Animal')")
+        @PreAuthorize("hasPermission(T(de.muenchen.animad.admin.administration.security.ResourcesEnum).administration_DELETE_Animal.name(), 'Entitlements')")
 	void deleteAll();
 	
 	Animal_ findByName(@Param(value= "name") String name);

@@ -34,10 +34,24 @@ logging.level.com.netflix.discovery : 'OFF'
 #Wiremock
 URL : http://localhost:8089/
 
-# Security
-# security.oauth2.resource.userInfoUri: http://AUTHSERVICE/uaa/user
-# security.oauth2.resource.preferTokenInfo: false
-security.ignored: /**
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    entitlements:
+      entitlementsUri: http://localhost:8080/auth/realms/demo/authz/entitlement/openIdDemo    
+    resource:
+      filter-order: 3
+      jwt:
+        key-value: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqjrVO6S3X8U79FSJgY/zKBvEe+YOYAVRnjeaZLaFs66Amglf1RLp1G2ZANCtEV35uPOWi3ErkQDvGEOn0BNlgxYFI6iPO2co6RnPIRNEIhp7uvw9mxevXmIcRfv0/bulus81ET7H/POYqYpr7zXaN1EQU5nhjsSF39AHC5Xp49Fve8fihtWu63JOd/WnlkxJ+esxl+q+Wx1wBKdY8eaIxrKs3REZV0wxrSq7qwBEgAJ5HAojz3SO/A6s4K/J0Fm1WCxsnkm9LJ+gtnfDltYoJDbZafQyifT45oHz0pApIScqbsvgriOjQxSrQ7XzUx9btMxoKdPHrjlTukGweInqlQIDAQAB
+    client:
+      client-id: openIdDemo
+
+
+logging:
+    level:
+      de.muenchen.referenzarchitektur.authorisationLib: DEBUG
 
 ---
 spring:
@@ -50,4 +64,10 @@ server.port: 39146
 ---
 spring:
     profiles: vm
+---
+spring:
+    profiles: no-security
+    h2.console.enabled: true
+server.port: 39146
 
+security.ignored: /**
