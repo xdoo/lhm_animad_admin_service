@@ -81,6 +81,8 @@ public class TestDatenBusinessActionServiceImpl implements TestDatenBusinessActi
             
             //NEU
             
+        System.out.println("############ Create Test Data ##############");
+
         //insert example data for Enclosures
         Enclosure_ enclosure = new Enclosure_();
         enclosure.setName("Elephant's Paradise");
@@ -90,7 +92,7 @@ public class TestDatenBusinessActionServiceImpl implements TestDatenBusinessActi
         //insert example data for Zookeepers
         Keeper_ keeper = new Keeper_();
         keeper.setFirstName("Hans");
-        keeper.setLastName("Dampf");
+        keeper.setLastName("van der Damme");
         keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning, Features_.feeding)));
         keeper.setBirthday(java.time.LocalDate.parse("04.08.1974", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
@@ -128,7 +130,7 @@ public class TestDatenBusinessActionServiceImpl implements TestDatenBusinessActi
         //Save all example Entities in an order that won't cause errors
         enclosureRepo.save(enclosure);
 
-        keeper.setFirstName("Abcd");
+        keeper.setFirstName("Hans");
         keeper.setLastName("Bla");
         keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
@@ -137,7 +139,7 @@ public class TestDatenBusinessActionServiceImpl implements TestDatenBusinessActi
         keeper.setOid(UUID.randomUUID());
 	keeperRepo.save(keeper);
 
-        keeper.setFirstName("Abcd");
+        keeper.setFirstName("Hans");
         keeper.setLastName("Cro");
         keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
@@ -146,7 +148,7 @@ public class TestDatenBusinessActionServiceImpl implements TestDatenBusinessActi
         keeper.setOid(UUID.randomUUID());
 	keeperRepo.save(keeper);
 
-        keeper.setFirstName("Abcd");
+        keeper.setFirstName("Anna Lena");
         keeper.setLastName("Dom");
         keeper.setEmploymentDate(java.time.LocalDate.parse("01.01.2017", java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         keeper.setSkill(new java.util.ArrayList<>(Arrays.asList(Features_.cleaning)));
@@ -217,6 +219,6 @@ public class TestDatenBusinessActionServiceImpl implements TestDatenBusinessActi
         keeper.setSalary(1450L);
         keeper.setOid(UUID.randomUUID());
 	keeperRepo.save(keeper);
-		}
+    }
 
 }
