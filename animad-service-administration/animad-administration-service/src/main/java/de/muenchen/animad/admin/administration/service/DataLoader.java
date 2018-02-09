@@ -9,6 +9,7 @@ import de.muenchen.animad.admin.administration.service.gen.services.businessacti
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
  * @author robert.jasny
  */
 @Component
+@Profile("no-security")
 public class DataLoader implements ApplicationRunner {
 
      @Autowired
