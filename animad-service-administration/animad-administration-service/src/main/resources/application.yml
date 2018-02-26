@@ -16,10 +16,10 @@ spring:
 
 ribbon.http.client.enabled: true
 
-info.url: http://localhost:${service.port}/
+info.url: http://admin-service:${service.port}/
 service:
     info:
-        oid: ANIMAD-ADMINISTRATION
+        oid: admin-service
         name: Administration
         version: v0.1
     configuration:
@@ -68,6 +68,6 @@ spring:
 spring:
     profiles: no-security
     h2.console.enabled: true
-server.port: 39146
+server.port: 8080
 
 security.ignored: /**
