@@ -19,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * Application class for starting the micro-service.
  */
 @Configuration
-@ComponentScan(basePackages = {"de.muenchen.animad.admin.administration.service", "de.muenchen.service", "de.muenchen.auditing", "de.muenchen.referenzarchitektur.authorisationLib"})
+@ComponentScan(basePackages = {"de.muenchen.animad.admin.administration.service", "de.muenchen.service", "de.muenchen.auditing", "de.muenchen.commons.authorisation"})
 @EntityScan(basePackages = {"de.muenchen.animad.admin.administration.service", "de.muenchen.service", "de.muenchen.auditing"})
 @EnableJpaRepositories(basePackages = {"de.muenchen.animad.admin.administration.service", "de.muenchen.service", "de.muenchen.auditing"})
 @EnableAutoConfiguration
