@@ -34,6 +34,7 @@ logging.level.com.netflix.discovery : 'OFF'
 #Wiremock
 URL : http://localhost:8089/
 
+spring.cache.guava.spec: maximumSize=500,expireAfterAccess=420s
 
 security:
   basic:
@@ -44,7 +45,7 @@ security:
     resource:
       filter-order: 3
       jwt:
-        key-value: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqjrVO6S3X8U79FSJgY/zKBvEe+YOYAVRnjeaZLaFs66Amglf1RLp1G2ZANCtEV35uPOWi3ErkQDvGEOn0BNlgxYFI6iPO2co6RnPIRNEIhp7uvw9mxevXmIcRfv0/bulus81ET7H/POYqYpr7zXaN1EQU5nhjsSF39AHC5Xp49Fve8fihtWu63JOd/WnlkxJ+esxl+q+Wx1wBKdY8eaIxrKs3REZV0wxrSq7qwBEgAJ5HAojz3SO/A6s4K/J0Fm1WCxsnkm9LJ+gtnfDltYoJDbZafQyifT45oHz0pApIScqbsvgriOjQxSrQ7XzUx9btMxoKdPHrjlTukGweInqlQIDAQAB
+        key-value: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr1aJe3anRtLHLbJJ/z+FI3p6uJbypBM5llSJ41cv0s5X2gDjO/EsEmngDf8Ypo4gTdTwwWTLoTgJWK1KVveiX5TUIxiEbpjaVAiKzc3IXNMrq+6DMcyrDiyVjAsWkleAAmQJJwnsp7vv0/1IRIdj6t3r4+CUQOp3PiBPojRh7QGZxuU0MbsgwBKAW1AUyM17F2knovpshi9crwzwf47p3xa6uGJYHx+iAV7ritgC6QYWwg92PT2nXMUQbo+VllRb/gwvWdrIuybKUBlXZ59/M2greCudYjGhn0g5l236ADZYvGfxl8lk+x1ZHhX6Rp5IAWM8rrCjEoVdP2PUXPIadQIDAQAB
     client:
       client-id: openIdDemo
 
