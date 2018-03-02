@@ -16,10 +16,10 @@ spring:
 
 ribbon.http.client.enabled: true
 
-info.url: http://localhost:${service.port}/
+info.url: http://admin-service:${service.port}/
 service:
     info:
-        oid: ANIMAD-ADMINISTRATION
+        oid: admin-service
         name: Administration
         version: v0.1
     configuration:
@@ -35,18 +35,6 @@ logging.level.com.netflix.discovery : 'OFF'
 URL : http://localhost:8089/
 
 
-security:
-  basic:
-    enabled: false
-  oauth2:
-    entitlements:
-      entitlementsUri: http://localhost:8080/auth/realms/demo/authz/entitlement/openIdDemo    
-    resource:
-      filter-order: 3
-      jwt:
-        key-value: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqjrVO6S3X8U79FSJgY/zKBvEe+YOYAVRnjeaZLaFs66Amglf1RLp1G2ZANCtEV35uPOWi3ErkQDvGEOn0BNlgxYFI6iPO2co6RnPIRNEIhp7uvw9mxevXmIcRfv0/bulus81ET7H/POYqYpr7zXaN1EQU5nhjsSF39AHC5Xp49Fve8fihtWu63JOd/WnlkxJ+esxl+q+Wx1wBKdY8eaIxrKs3REZV0wxrSq7qwBEgAJ5HAojz3SO/A6s4K/J0Fm1WCxsnkm9LJ+gtnfDltYoJDbZafQyifT45oHz0pApIScqbsvgriOjQxSrQ7XzUx9btMxoKdPHrjlTukGweInqlQIDAQAB
-    client:
-      client-id: openIdDemo
 
 
 logging:
@@ -57,17 +45,48 @@ logging:
 spring:
     profiles: docker
 ---
+# LOCAL CONFIGURATION
 spring:
     profiles: local
     h2.console.enabled: true
 server.port: 39146
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    entitlements:
+      entitlementsUri: http://localhost:8080/auth/realms/demo/authz/entitlement/openIdDemo   
+    permissions:
+      permissionsUri: http://localhost:8870/permissions
+    resource:
+      filter-order: 3
+      jwt:
+        key-value: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlsteeVtC+LlM/uhuusceFDvKbeCPolBEpq+rNnRbBvSPDCdKGcIIpjrQswX/58loE/bQ45A5IY1Tlm1MWbGxZ0IZhYaILeTNySTK3aRsV94OpN+ib/PGWkP1aQZ6wdm4//C6whOhCbulbLwSTyjByD72FGdaO/OhrATD9OAEcP0QmrvjLRHQBA80lxB4fRCyIrea9aL/AuvBsAbTz1Ub70rH8ydwaPtev7/L4dY+9NaqoL23pLIYyV7k3cuPeyHU/lt4I68R4rNiFv08zQFWGMr+li13cWNi9KsNfP5h6Ce7h+D2WmOUv7Tm9b8rAJ4jGHuf8ylHWt0SQxBtofuldwIDAQAB
+    client:
+      client-id: openIdDemo
+
 ---
 spring:
     profiles: vm
 ---
+# NO-SECURITY CONFIGURATION
 spring:
     profiles: no-security
     h2.console.enabled: true
-server.port: 39146
 
-security.ignored: /**
+security:
+    ignored: /**
+    permissions:
+      permissionsUri: http://localhost:8870/permissions
+---
+# OPENSHIFT CONFIGURATION
+spring:
+    profiles: openshift
+server.port: 8080
+
+security:
+    ignored: /**
+    permissions:
+      permissionsUri: http://user-service:8080/permissions
+

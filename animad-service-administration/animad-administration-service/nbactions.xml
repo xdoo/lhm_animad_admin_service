@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-run local no-security</actionName>
+            <displayName>run local no-security</displayName>
+            <goals>
+                <goal>spring-boot:run</goal>
+            </goals>
+            <properties>
+                <spring.profiles.active>local,no-security</spring.profiles.active>
+            </properties>
+        </action>
+        <action>
+            <actionName>CUSTOM-run no-security openshift</actionName>
+            <displayName>run no-security openshift</displayName>
+            <goals>
+                <goal>spring-boot:run</goal>
+            </goals>
+            <properties>
+                <spring.profiles.active>no-security,openshift</spring.profiles.active>
+            </properties>
+        </action>
+    </actions>
