@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+import org.springframework.beans.factory.annotation.Value;
 
 import org.hibernate.search.exception.EmptyQueryException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,9 @@ public class Enclosure_SearchController {
 
     @Autowired
     Enclosure_Repository repository;
+
+    @Value("${service.configuration.maxSearchResults}")
+    Integer maxSearchResults;
 
     @RequestMapping(method = RequestMethod.GET, value = "findFullTextFuzzy")
     @ResponseBody
@@ -98,6 +102,8 @@ public class Enclosure_SearchController {
         }
 
         final List<PersistentEntityResource> collect = enclosureStream.map(assembler::toResource).collect(Collectors.toList());
+
+        if (collect.size() > maxSearchResults) throw new TooManyResultsException(maxSearchResults);
         return new ResponseEntity<>(new Resources<>(collect), HttpStatus.OK);
     }
     /* NEW END */
