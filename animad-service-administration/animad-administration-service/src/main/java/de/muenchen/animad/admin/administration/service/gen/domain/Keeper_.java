@@ -23,6 +23,7 @@ import de.muenchen.service.BaseEntity;
 import de.muenchen.service.PetersPerfectBridge;
 import de.muenchen.vaadin.demo.apilib.domain.Past;
 import de.muenchen.auditing.MUCAudited;
+import javax.persistence.FetchType;
 
 /*
  * This file will be overwritten on every change of the model!
@@ -73,7 +74,7 @@ public class Keeper_ extends BaseEntity {
 	@Column(name="skill")
 	@OrderColumn(name="order_index")
 	@CollectionTable(name = "Keeper_Skill", joinColumns = { @JoinColumn(name = "keeper_oid")})
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	@Size(min = 1)

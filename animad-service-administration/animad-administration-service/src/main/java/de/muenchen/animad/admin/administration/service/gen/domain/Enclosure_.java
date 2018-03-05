@@ -20,6 +20,7 @@ import org.hibernate.search.annotations.Field;
 import de.muenchen.service.BaseEntity;
 import de.muenchen.service.PetersPerfectBridge;
 import de.muenchen.auditing.MUCAudited;
+import javax.persistence.FetchType;
 
 /*
  * This file will be overwritten on every change of the model!
@@ -58,7 +59,7 @@ public class Enclosure_ extends BaseEntity {
 	
 	@OrderColumn(name="order_index")
 	@JoinTable(name = "Enclosure_AnimalList", joinColumns = { @JoinColumn(name = "enclosure_oid")}, inverseJoinColumns = {@JoinColumn(name="animalList_oid")})
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
 	@NotNull
 	@Size(min = 1)
 	private java.util.List<Animal_> animalList = new java.util.ArrayList<>();
