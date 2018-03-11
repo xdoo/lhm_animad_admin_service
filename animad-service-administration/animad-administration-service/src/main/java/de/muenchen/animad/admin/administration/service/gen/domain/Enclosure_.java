@@ -59,7 +59,7 @@ public class Enclosure_ extends BaseEntity {
 	
 	@OrderColumn(name="order_index")
 	@JoinTable(name = "Enclosure_AnimalList", joinColumns = { @JoinColumn(name = "enclosure_oid")}, inverseJoinColumns = {@JoinColumn(name="animalList_oid")})
-	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+	@OneToMany
 	@NotNull
 	@Size(min = 1)
 	private java.util.List<Animal_> animalList = new java.util.ArrayList<>();

@@ -83,7 +83,7 @@ public class Animal_ extends BaseEntity {
 	
 	@OrderColumn(name="order_index")
 	@JoinTable(name = "Animal_KeeperList", joinColumns = { @JoinColumn(name = "animal_oid")}, inverseJoinColumns = {@JoinColumn(name="keeperList_oid")})
-	@ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@ManyToMany
 	@NotNull
 	@Size(min = 1)
 	private java.util.List<Keeper_> keeperList = new java.util.ArrayList<>();
