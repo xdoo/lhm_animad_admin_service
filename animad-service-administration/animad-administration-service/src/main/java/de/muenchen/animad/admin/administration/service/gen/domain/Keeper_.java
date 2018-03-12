@@ -23,7 +23,6 @@ import de.muenchen.service.BaseEntity;
 import de.muenchen.service.PetersPerfectBridge;
 import de.muenchen.vaadin.demo.apilib.domain.Past;
 import de.muenchen.auditing.MUCAudited;
-import javax.persistence.FetchType;
 
 /*
  * This file will be overwritten on every change of the model!
