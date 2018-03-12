@@ -74,7 +74,7 @@ public class Keeper_ extends BaseEntity {
 	@Column(name="skill")
 	@OrderColumn(name="order_index")
 	@CollectionTable(name = "Keeper_Skill", joinColumns = { @JoinColumn(name = "keeper_oid")})
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	@Size(min = 1)
