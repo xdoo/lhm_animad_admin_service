@@ -1,7 +1,7 @@
 
 package de.muenchen.service;
 
-import de.muenchen.animad.admin.administration.service.gen.exceptions.TooManyResultsException;
+//import de.muenchen.animad.admin.administration.service.gen.exceptions.TooManyResultsException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,7 +18,7 @@ import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.BooleanJunction;
 import org.hibernate.search.query.dsl.QueryBuilder;
-import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -27,8 +27,8 @@ public class QueryServiceChanged {
     @PersistenceContext
     EntityManager entityManager;
     
-    @Value("${service.configuration.maxSearchResults}")
-    Integer maxSearchResults;
+//    @Value("${service.configuration.maxSearchResults}")
+//    Integer maxSearchResults;
 
     public QueryServiceChanged() {
     }
@@ -54,7 +54,7 @@ public class QueryServiceChanged {
      * @return A list of entities that where found for the given query
      * @throws TooManyResultsException if the number of results exceeds service.configuration.maxSearchResults
      */
-    public <E extends BaseEntity> List<E> queryJunction(String text, Class<E> entity, String[] properties) throws TooManyResultsException {
+    public <E extends BaseEntity> List<E> queryJunction(String text, Class<E> entity, String[] properties) {
 
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
         QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
@@ -76,7 +76,7 @@ public class QueryServiceChanged {
             query = createSingleQuery("", queryBuilder, properties);
         }
         FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, new Class[]{entity});
-        if (jpaQuery.getResultSize() > maxSearchResults) throw new TooManyResultsException(maxSearchResults);
+//        if (jpaQuery.getResultSize() > maxSearchResults) throw new TooManyResultsException(maxSearchResults);
         return jpaQuery.getResultList();
     }
 
