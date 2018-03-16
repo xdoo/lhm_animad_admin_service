@@ -51,6 +51,21 @@
       "name": "administration_BUSINESSACTION_CreateAppointment",
       "type": "animad_admin_service",
       "typedScopes": []
+    },
+    {
+      "name": "administration_GUI_KeepersView",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    },
+    {
+      "name": "administration_GUI_AnimalsView",
+      "type": "animad_admin_service",
+      "typedScopes": []
+    },
+    {
+      "name": "administration_GUI_EnclosuresView",
+      "type": "animad_admin_service",
+      "typedScopes": []
     }
   ],
   "policies": [
@@ -170,6 +185,36 @@
       "config": {
         "resources": "[\"administration_BUSINESSACTION_CreateAppointment\"]",
         "applyPolicies": "[\"rolepolicy_admin\"]"
+      }
+    },
+    {
+      "name": "permission_administration_GUI_KeepersView",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"administration_GUI_KeepersView\"]",
+        "applyPolicies": "[\"rolepolicy_admin\",\"rolepolicy_readonly\"]"
+      }
+    },
+    {
+      "name": "permission_administration_GUI_AnimalsView",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"administration_GUI_AnimalsView\"]",
+        "applyPolicies": "[\"rolepolicy_admin\",\"rolepolicy_readonly\"]"
+      }
+    },
+    {
+      "name": "permission_administration_GUI_EnclosuresView",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"administration_GUI_EnclosuresView\"]",
+        "applyPolicies": "[\"rolepolicy_admin\",\"rolepolicy_readonly\"]"
       }
     }
   ],
