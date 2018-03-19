@@ -73,7 +73,7 @@ public class QueryServiceChanged {
             query = boolJunction.createQuery();
         }
         else {
-            query = createSingleQuery("", queryBuilder, properties);
+            query = createSingleQuery("*", queryBuilder, properties);
         }
         FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, new Class[]{entity});
 //        if (jpaQuery.getResultSize() > maxSearchResults) throw new TooManyResultsException(maxSearchResults);
