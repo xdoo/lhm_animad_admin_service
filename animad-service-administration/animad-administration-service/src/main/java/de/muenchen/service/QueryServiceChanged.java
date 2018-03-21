@@ -73,7 +73,7 @@ public class QueryServiceChanged {
             query = boolJunction.createQuery();
         }
         else {
-            query = createSingleQuery("", queryBuilder, properties);
+            query = createSingleQuery("*", queryBuilder, properties);
         }
         FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, new Class[]{entity});
 //        if (jpaQuery.getResultSize() > maxSearchResults) throw new TooManyResultsException(maxSearchResults);
@@ -134,12 +134,14 @@ public class QueryServiceChanged {
                 // remove surrounding "
                 int end = termValues[1].length() - 1;
                 termValues[1] = termValues[1].substring(1, end);
+                query = queryBuilder.phrase().withSlop(1).onField(termValues[0]).sentence(termValues[1]).createQuery();
+            } else {
+                query = queryBuilder.keyword().wildcard().onField(termValues[0]).matching(termValues[1]).createQuery();
             }
-            query = queryBuilder.phrase().onField(termValues[0]).sentence(termValues[1]).createQuery();
         }
         else {
             // Otherwise search in all fields
-            query = queryBuilder.keyword().onFields(properties).matching(term).createQuery();
+            query = queryBuilder.keyword().wildcard().onFields(properties).matching(term).createQuery();
         }
 
         return query;
