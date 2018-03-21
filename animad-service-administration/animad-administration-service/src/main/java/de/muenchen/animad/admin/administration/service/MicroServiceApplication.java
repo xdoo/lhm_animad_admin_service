@@ -27,7 +27,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 //@EnableEurekaClient
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @EnableResourceServer
-@EnableCaching
+//@EnableCaching
 public class MicroServiceApplication {
 	
 	public static void main(String[] args) throws Exception {
