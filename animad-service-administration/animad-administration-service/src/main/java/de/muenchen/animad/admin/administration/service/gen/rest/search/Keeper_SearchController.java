@@ -43,7 +43,7 @@ public class Keeper_SearchController {
     @Autowired
     Keeper_Repository repository;
 
-    @Value("${service.configuration.maxSearchResults}")
+    @Value("${service.configuration.maxSearchResults:500}")
     Integer maxSearchResults;
 
     @RequestMapping(method = RequestMethod.GET, value = "findFullTextFuzzy")
